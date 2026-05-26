@@ -908,16 +908,28 @@
       gap: 12px;
     }
     .footer-names {
-      font-family: var(--font-script);
-      font-size: 26px;
+      font-family: var(--font-display);
+      font-size: 32px;
       color: var(--rose);
     }
     .footer-made {
-      font-family: var(--font-body);
+      font-family: var(--font-skinny);
       font-size: 12px;
       color: rgba(212,137,154,0.6);
-      letter-spacing: 0.5px;
+      letter-spacing: 0.06em;
     }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%       { transform: scale(1.25); }
+    28%       { transform: scale(1); }
+    42%       { transform: scale(1.2); }
+    56%       { transform: scale(1); }
+  }
+  .footer-heart {
+    animation: heartbeat 1.6s ease-in-out infinite;
+    transform-origin: center;
+    display: block;
+  }
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
@@ -1366,10 +1378,10 @@
 <footer class="footer">
   <p class="footer-names">Katia &amp; Andrés · 20.03.2027</p>
   <!-- Rose heart -->
-  <svg width="28" height="26" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="footer-heart" width="28" height="26" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M14 24 C14 24 2 15.5 2 8 C2 4.7 4.7 2 8 2 C10.2 2 12.1 3.2 14 5 C15.9 3.2 17.8 2 20 2 C23.3 2 26 4.7 26 8 C26 15.5 14 24 14 24 Z" fill="#D4899A" opacity="0.7"/>
   </svg>
-  <p class="footer-made" data-i18n="footer_made">Hecho con amor · Morelia, México</p>
+  <p class="footer-made" data-i18n="footer_made">Hecho con amor · Amsterdam</p>
 </footer>
 
 
@@ -1438,7 +1450,7 @@
       gift_copy: 'Copiar',
       gift_eu_label: 'Revolut',
       gift_revolut_btn: 'Abrir Revolut →',
-      footer_made: 'Hecho con amor · Morelia, México',
+      footer_made: 'Hecho con amor · Amsterdam',
     },
     en: {
       nav_date: '03.20.2027',
@@ -1499,7 +1511,7 @@
       gift_copy: 'Copy',
       gift_eu_label: 'Revolut',
       gift_revolut_btn: 'Open Revolut →',
-      footer_made: 'Made with love · Morelia, México',
+      footer_made: 'Made with love · Amsterdam',
     }
   };
 
