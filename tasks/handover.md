@@ -113,25 +113,22 @@ Section borders use absolutely-positioned PNG illustrations (transparent bg, 160
   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headless --screenshot=assets/og-image.png --window-size=1200,630 --hide-scrollbars "file:///$(pwd)/assets/og-export.html"
   ```
 - Layout: text left, hero illustration absolutely positioned right (names overlap image), butterfly+hummingbird top-left, toucan+coffee bottom-left
-- Meta tags added to `index.html` — replace `PLACEHOLDER_DOMAIN` with real URL after deploy
+- Meta tags added to `index.html` — domain set to `https://andresykaty.com`
 
 ---
 
 ## Open Items
 
 ### Before wedding:
-- [ ] Replace `PLACEHOLDER_DOMAIN` in `index.html` OG/Twitter meta tags with real deployed URL
-- [ ] Replace Knipsmig link with real upload event link (Photos section)
+- [ ] Replace Knipsmig link with real photo upload event link (Photos section)
 - [ ] Fill in real MX CLABE number in transfer modal HTML (`0000 0000 0000 0000 0000`)
 - [ ] Fill in real Revolut username (`@username`) and link (`https://revolut.me/username`)
-- [ ] Set up deployment (GitHub Pages or Netlify — TBD)
 
-### Remaining design work:
-- [ ] Footer review — fonts not yet matched
-- [ ] Nav review — fonts not yet checked
-- [ ] Gift section bottom border decoration (nothing peeking into footer yet)
-- [ ] Final venue photo — user will provide, drop in `assets/`
-- [ ] Hotel Google Maps links — currently generic, user may want direct links
+### Done:
+- [x] Domain live at `andresykaty.com` (Cloudflare Pages)
+- [x] OG meta tags set with real domain
+- [x] Venue photo (`jardin-cropped.png`) confirmed correct
+- [x] Hotel Google Maps links — left as generic (accepted)
 
 ---
 
