@@ -18,4 +18,4 @@ Format: `[YYYY-MM-DD] | what went wrong | rule to prevent it`
 
 [2026-05-26] | GSAP parallax on location image was pushing image DOWN (yPercent 0→25), revealing body background at top | Always use fromTo with negative start value for parallax: fromTo(-15, 10). Image must always cover its container top.
 
-[2026-05-26] | TheSkinny font has tight spacing around openers and accented letters | Rules for --font-skinny text: (1) always apply letter-spacing: 0.06em; (2) add a space after ¿ and ¡ openers; (3) add a space after every accented letter (á, é, í, ó, ú, ñ) when immediately followed by another letter.
+[2026-05-26] | TheSkinny font has tight spacing around openers and accented letters | Rules for --font-skinny text ONLY: (1) always apply letter-spacing: 0.06em; (2) add a space after ¿ and ¡ openers; (3) add a space after every accented letter (á, é, í, ó, ú, ñ) when immediately followed by another letter; (4) add a space after /; (5) add a space after '. NEVER apply these spacing rules to --font-display (HelloHoney) or --font-body (Nunito).

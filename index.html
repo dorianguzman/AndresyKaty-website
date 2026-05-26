@@ -518,6 +518,25 @@
       background: linear-gradient(135deg, var(--blush) 0%, #F5E0E5 100%);
       padding: 80px 24px 90px;
       text-align: center;
+      position: relative;
+    }
+    .photos-border-deco {
+      position: absolute;
+      width: 160px;
+      pointer-events: none;
+      z-index: 10;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(50%) rotate(-15deg);
+    }
+    .rsvp-border-deco {
+      position: absolute;
+      width: 160px;
+      pointer-events: none;
+      z-index: 10;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(50%) rotate(15deg);
     }
     .photos-title {
       font-family: var(--font-display);
@@ -540,10 +559,10 @@
     }
     .btn-garnet {
       display: inline-block;
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-family: var(--font-skinny);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       padding: 14px 36px;
       border-radius: 50px;
       background: var(--garnet);
@@ -561,18 +580,10 @@
       background: #fff;
       padding: 80px 24px 90px;
       position: relative;
-      overflow: hidden;
-    }
-    .rsvp-deco {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 24px;
-      align-items: center;
     }
     .rsvp-title {
-      font-family: var(--font-script);
-      font-size: clamp(40px, 8vw, 60px);
+      font-family: var(--font-display);
+      font-size: clamp(48px, 10vw, 76px);
       color: var(--garnet);
       text-align: center;
       margin-bottom: 40px;
@@ -590,17 +601,17 @@
       gap: 6px;
     }
     .form-field label {
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 600;
+      font-family: var(--font-skinny);
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       color: #8a6070;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
     }
     .form-field input,
     .form-field textarea {
-      font-family: var(--font-body);
-      font-size: 14px;
+      font-family: var(--font-skinny);
+      font-size: 18px;
+      letter-spacing: 0.06em;
       padding: 13px 20px;
       border: 2px solid rgba(212,137,154,0.25);
       border-radius: 50px;
@@ -629,9 +640,10 @@
       width: fit-content;
     }
     .toggle-btn {
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 600;
+      font-family: var(--font-skinny);
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       padding: 11px 24px;
       border: none;
       background: transparent;
@@ -647,10 +659,10 @@
     .guest-field { display: none; }
     .guest-field.visible { display: flex; }
     .rsvp-submit {
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-family: var(--font-skinny);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       padding: 16px 40px;
       border-radius: 50px;
       border: none;
@@ -667,8 +679,9 @@
     }
     .rsvp-deadline {
       text-align: center;
-      font-family: var(--font-script);
-      font-size: 17px;
+      font-family: var(--font-skinny);
+      font-size: 20px;
+      letter-spacing: 0.06em;
       color: #aaa;
       margin-top: 8px;
     }
@@ -679,8 +692,8 @@
     }
     .rsvp-thanks.visible { display: block; }
     .rsvp-thanks p {
-      font-family: var(--font-script);
-      font-size: 36px;
+      font-family: var(--font-display);
+      font-size: clamp(36px, 7vw, 52px);
       color: var(--garnet);
       margin-top: 16px;
     }
@@ -1067,7 +1080,8 @@
 
   <h2 class="photos-title" data-i18n="photos_title">¡Queremos ver tus fotos!</h2>
   <p class="photos-body" data-i18n="photos_body">Aquí podrá s subir los ví deos y fotos que captures durante el dí a</p>
-  <a href="https://knipsmig.com/pgalYgcS" target="_blank" rel="noopener" class="btn-garnet reveal" data-i18n="photos_btn">Súbelas aquí →</a>
+  <a href="https://knipsmig.com/pgalYgcS" target="_blank" rel="noopener" class="btn-garnet reveal" data-i18n="photos_btn">Sú belas aquí →</a>
+  <img class="photos-border-deco" src="./assets/rsvp-colombia-modified.png" alt="Colombia" />
 </section>
 
 
@@ -1075,37 +1089,6 @@
      8. RSVP
 ═══════════════════════════════════════ -->
 <section class="rsvp-section" id="rsvp">
-  <!-- Taco + Orange decorations -->
-  <div class="rsvp-deco">
-    <!-- Taco SVG -->
-    <svg width="52" height="44" viewBox="0 0 52 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Shell -->
-      <path d="M4 30 Q26 4 48 30" stroke="#C9854A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-      <path d="M4 30 Q26 10 48 30 L44 38 Q26 28 8 38 Z" fill="#E8B87A" stroke="#C9854A" stroke-width="1.5"/>
-      <!-- Lettuce -->
-      <path d="M12 28 Q16 20 20 26 Q24 18 28 26 Q32 18 36 26 Q40 20 40 27" stroke="#7a8c45" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <!-- Orange filling -->
-      <ellipse cx="26" cy="32" rx="12" ry="5" fill="#E8956D" opacity="0.85"/>
-      <!-- Cream cheese drip -->
-      <path d="M20 34 Q22 40 24 36 Q26 42 28 36 Q30 40 32 34" stroke="#FDF6F0" stroke-width="2" fill="none" stroke-linecap="round"/>
-    </svg>
-    <!-- Orange Slice SVG -->
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="24" cy="24" r="22" fill="#E8956D"/>
-      <circle cx="24" cy="24" r="16" fill="#F5B98A" opacity="0.7"/>
-      <!-- Segments -->
-      <line x1="24" y1="8" x2="24" y2="40" stroke="#D4752D" stroke-width="1.2" opacity="0.5"/>
-      <line x1="8" y1="24" x2="40" y2="24" stroke="#D4752D" stroke-width="1.2" opacity="0.5"/>
-      <line x1="11.8" y1="11.8" x2="36.2" y2="36.2" stroke="#D4752D" stroke-width="1.2" opacity="0.5"/>
-      <line x1="36.2" y1="11.8" x2="11.8" y2="36.2" stroke="#D4752D" stroke-width="1.2" opacity="0.5"/>
-      <!-- Pulp dots -->
-      <circle cx="24" cy="18" r="1.5" fill="#FDF6F0" opacity="0.6"/>
-      <circle cx="30" cy="24" r="1.5" fill="#FDF6F0" opacity="0.6"/>
-      <circle cx="18" cy="24" r="1.5" fill="#FDF6F0" opacity="0.6"/>
-      <circle cx="24" cy="30" r="1.5" fill="#FDF6F0" opacity="0.6"/>
-    </svg>
-  </div>
-
   <h2 class="rsvp-title" data-i18n="rsvp_title">¿Asistirás?</h2>
 
   <form class="rsvp-form" id="rsvpForm" onsubmit="submitRsvp(event)">
@@ -1118,14 +1101,14 @@
       <input type="text" id="rsvp-fullname" required placeholder="" />
     </div>
     <div class="form-field">
-      <label data-i18n="rsvp_plus_one_q">¿Vienes acompañado/a?</label>
+      <label data-i18n="rsvp_plus_one_q">¿ Vienes acompañ ado/ a?</label>
       <div class="plus-one-toggle">
         <button type="button" class="toggle-btn" id="plusOneNo" onclick="setPlusOne(false)" data-i18n="rsvp_no">No</button>
         <button type="button" class="toggle-btn active" id="plusOneYes" onclick="setPlusOne(true)" data-i18n="rsvp_yes">Sí</button>
       </div>
     </div>
     <div class="form-field guest-field visible" id="guestField">
-      <label data-i18n="rsvp_guest">Nombre de tu acompañante</label>
+      <label data-i18n="rsvp_guest">Nombre de tu acompañ ante</label>
       <input type="text" id="rsvp-guest" placeholder="" />
     </div>
     <div class="form-field">
@@ -1133,7 +1116,7 @@
       <textarea id="rsvp-dietary" rows="3"></textarea>
     </div>
     <button type="submit" class="rsvp-submit" data-i18n="rsvp_submit">Confirmar asistencia</button>
-    <p class="rsvp-deadline" data-i18n="rsvp_deadline">Por favor confirma antes del 01/01/2027</p>
+    <p class="rsvp-deadline" data-i18n="rsvp_deadline">Por favor confirma antes del 01/ 01/ 2027</p>
   </form>
 
   <div class="rsvp-thanks" id="rsvpThanks">
@@ -1142,6 +1125,7 @@
     </svg>
     <p data-i18n="rsvp_thanks">¡Gracias! Nos vemos el 20 de marzo 🎉</p>
   </div>
+  <img class="rsvp-border-deco" src="./assets/rsvp-mexico-modified.png" alt="México" />
 </section>
 
 
@@ -1254,17 +1238,17 @@
       faq_a4: 'Confirmaremos los detalles pró ximamente.',
       photos_title: '¡Queremos ver tus fotos!',
       photos_body: 'Aquí podrá s subir los ví deos y fotos que captures durante el dí a',
-      photos_btn: 'Súbelas aquí →',
+      photos_btn: 'Sú belas aquí →',
       rsvp_title: '¿Asistirás?',
       rsvp_nickname: 'Tu apodo',
       rsvp_name: 'Nombre y apellidos',
-      rsvp_plus_one_q: '¿Vienes acompañado/a?',
+      rsvp_plus_one_q: '¿ Vienes acompañ ado/ a?',
       rsvp_yes: 'Sí',
       rsvp_no: 'No',
-      rsvp_guest: 'Nombre de tu acompañante',
+      rsvp_guest: 'Nombre de tu acompañ ante',
       rsvp_dietary: 'Intolerancias o alergias alimenticias',
       rsvp_submit: 'Confirmar asistencia',
-      rsvp_deadline: 'Por favor confirma antes del 01/01/2027',
+      rsvp_deadline: 'Por favor confirma antes del 01/ 01/ 2027',
       rsvp_thanks: '¡Gracias! Nos vemos el 20 de marzo 🎉',
       gift_title: 'Mesa de regalos',
       gift_lead: 'Nos encantaría llevarnos algún detalle de tu parte… pero ya venimos con la maleta llena.',
@@ -1312,10 +1296,10 @@
       rsvp_plus_one_q: 'Are you bringing a guest?',
       rsvp_yes: 'Yes',
       rsvp_no: 'No',
-      rsvp_guest: "Guest's name",
+      rsvp_guest: "Guest' s name",
       rsvp_dietary: 'Dietary restrictions or allergies',
       rsvp_submit: 'Confirm attendance',
-      rsvp_deadline: 'Please confirm before January 1st, 2027',
+      rsvp_deadline: 'Please confirm before 01/ 01/ 2027',
       rsvp_thanks: 'Thank you! See you on March 20th 🎉',
       gift_title: 'Gift registry',
       gift_lead: "We'd love a little something from you… but our suitcase is already full.",
