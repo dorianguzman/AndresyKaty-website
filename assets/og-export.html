@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>OG Image Export — Katia & Andrés</title>
+  <style>
+    @font-face {
+      font-family: 'HelloHoney';
+      src: url('./fonts/HelloHoney.otf') format('opentype');
+      font-weight: normal;
+    }
+    @font-face {
+      font-family: 'TheSkinny';
+      src: url('./fonts/TheSkinny.otf') format('opentype');
+      font-weight: normal;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #e8e0d8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: sans-serif;
+    }
+
+    #og-canvas {
+      width: 1200px;
+      height: 630px;
+      background: #FDF6F0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 80px;
+      border: 1px solid #ccc;
+    }
+
+    /* Garnet left accent bar */
+    #og-canvas::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 12px;
+      height: 100%;
+      background: #7A2B3A;
+    }
+
+    /* Subtle cream-to-blush gradient overlay */
+    #og-canvas::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, #FCF0F2 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ── LEFT: Text block ── */
+    .og-text {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      padding-left: 28px;
+    }
+
+    .og-label {
+      font-family: 'TheSkinny', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.22em;
+      color: #7A2B3A;
+      text-transform: uppercase;
+    }
+
+    .og-names {
+      font-family: 'HelloHoney', cursive;
+      font-size: 148px;
+      line-height: 0.88;
+      color: #2D1A1F;
+      letter-spacing: -1px;
+    }
+
+    .og-divider {
+      width: 72px;
+      height: 2px;
+      background: #D4899A;
+      border-radius: 2px;
+    }
+
+    .og-date {
+      font-family: 'TheSkinny', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.18em;
+      color: #7A2B3A;
+    }
+
+    .og-venue {
+      font-family: 'TheSkinny', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: #9E6B76;
+    }
+
+    /* ── RIGHT: Illustration ── */
+    .og-image {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      width: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .og-image img {
+      width: 630px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 24px rgba(122,43,58,0.12));
+    }
+
+    /* Botanical accents */
+    .og-deco-bottom-left {
+      position: absolute;
+      bottom: -20px;
+      left: 60px;
+      width: 130px;
+      opacity: 0.6;
+      z-index: 1;
+      transform: rotate(-10deg);
+    }
+
+    .og-deco-top-left {
+      position: absolute;
+      top: -20px;
+      left: 60px;
+      width: 130px;
+      opacity: 0.6;
+      z-index: 1;
+      transform: rotate(10deg);
+    }
+  </style>
+</head>
+<body>
+  <div id="og-canvas">
+
+    <!-- Left text -->
+    <div class="og-text">
+      <span class="og-label">¡ Nos casamos!</span>
+      <div class="og-names">Katia<br>&amp; Andrés</div>
+      <div class="og-divider"></div>
+      <span class="og-date">20 · 03 · 2027</span>
+      <span class="og-venue">Morelia, Mé xico</span>
+    </div>
+
+    <!-- Right illustration -->
+    <div class="og-image">
+      <img src="./hero-modified.png" alt="Katia & Andrés">
+    </div>
+
+    <!-- Botanical corners -->
+    <img class="og-deco-bottom-left" src="./faq-colombia-modified.png" alt="">
+    <img class="og-deco-top-left"    src="./faq-mexico-modified.png"   alt="">
+
+  </div>
+</body>
+</html>

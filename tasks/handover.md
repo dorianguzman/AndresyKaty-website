@@ -1,186 +1,137 @@
-# Handover — AndresyKaty Website
-
 ## Current State
-- **Status:** Section-by-section reference improvements in progress
+- **Status:** All 8 sections complete — font system unified, botanical decorations wired, RSVP + Gift functional
 - **Live file:** `index.html` (single-file, no build)
 - **Repo:** https://github.com/dorianguzman/AndresyKaty-website
-- **Completed sections:** Hero (1) ✅, Location (2) ✅, Timeline (3) ✅, Accommodation (4) ✅
-- **Remaining sections:** FAQ (5), Photos (6), RSVP (7), Gift (8)
-
-### Section 1 — Hero (done)
-- Blush `#FCF0F2` background, no dark overlay
-- `hero-modified.png` as foreground illustration (transparent bg)
-- **Hello Honey** for names (`--font-display`), **The Skinny** for "¡Nos casamos!" + date (`--font-skinny`)
-- Date moved into nav (aligned with ES/EN buttons)
-- "MORELIA, MX" below illustration in The Skinny
-- Scroll indicator at bottom center (bouncing animation)
-- ES/EN buttons: The Skinny bold, black border, rose fill on active
-
-### Section 2 — Location (done)
-- Venue image fills full section as absolute background layer
-- Garnet info panel overlaps bottom with `margin-top: 50vh`, frosted glass: `rgba(122,43,58,0.82)` + `backdrop-filter: blur(8px)`
-- Using `jardin-cropped.png` (cropped venue photo, user-provided)
-- Venue name: Hello Honey, `clamp(56px, 12vw, 82px)`, white
-- Google Maps link: https://maps.app.goo.gl/sxftxGoN9pgtngFC6
-- Parallax: `fromTo(-15, 10)` scrub
-
-### Section 3 — Timeline (done)
-- Rebuilt: large freeform illustrations (no icon circles), alternating left/right layout
-- **Hello Honey** for "timeline" title, **The Skinny** for event labels (Ceremonia, Bienvenida, etc.)
-- 3 individual connector SVGs between events: loop (tlc1), S-curve left (tlc2), gentle curve (tlc3) — each draws on scroll via GSAP
-- Ceremonia links to Google Maps: https://maps.app.goo.gl/ztnASWmWhxs6tocS8
-- TheSkinny accent fix: space after ó in "Celebraci ó n", "Có mo", "Misió n"
-- Mobile: alternating left/right layout preserved (no column collapse)
-
-### Section 4 — Accommodation (done)
-- **Hello Honey** title, **The Skinny** for hotel names + "Có mo llegar" buttons
-- Photo cards: hotel name (uppercase label) → photo (grayscale filter) → button
-- Hotel photos: `hotel1-4.jpg` in assets, wired in order
-- Country decorations: `mexico-modified.png` (marigolds + cactus) at top border (between timeline and accommodation), `colombia-modified.png` (orchids) at bottom border (between accommodation and FAQ)
-- Decorations: 160px, rotated ±15°, z-index: 10, overflow removed from accommodation + FAQ
-- Andrés = Colombia, Katia = Mexico
-
-### Open items
-- FAQ (5), Photos (6), RSVP (7), Gift (8) still to review
-- No deployment set up yet (GitHub Pages or Netlify — TBD)
-- Hotel Google Maps links are generic queries — user may want to update with direct links
+- **Git:** 10 commits ahead of origin/main — NOT pushed yet
+- **All sections done:** Hero (1) ✅, Location (2) ✅, Timeline (3) ✅, Accommodation (4) ✅, FAQ (5) ✅, Photos (6) ✅, RSVP (7) ✅, Gift (8) ✅
 
 ---
 
-## The Style We Are Building
+## Font System (LOCKED — apply to all future sections)
 
-This is the single most important thing to preserve across every future change.
+| Role | Font | CSS Var | Size |
+|------|------|---------|------|
+| Section titles | HelloHoney | `--font-display` | `clamp(48px, 10vw, 76px)` |
+| Card titles | HelloHoney | `--font-display` | `28px` |
+| Secondary / body | TheSkinny | `--font-skinny` | `16–20px` |
+| Body (functional) | Nunito | `--font-body` | labels, inputs |
 
-### Aesthetic Direction
-**Boho-romantic, Mexican, hand-illustrated.** The reference is the *Paula y Nerea* website style: editorial flat illustrations, warm earthy palette, handwritten type mixed with clean sans-serif, and festive cultural touches (tacos, orange slices, Talavera tiles, azulejo decorations). Not a template — feels custom-drawn.
-
-Key adjectives: **warm, intimate, slightly playful, artisanal, not corporate.**
-
-### Color Palette
-
-| Token | Hex | Use |
-|-------|-----|-----|
-| `--garnet` | `#7A2B3A` | Primary brand — buttons, headings, backgrounds |
-| `--garnet-dark` | `#5C1F2C` | Hover states, deep accents |
-| `--blush` | `#FCF0F2` | Light section backgrounds |
-| `--cream` | `#FDF6F0` | Page base, cards, form fields |
-| `--rose` | `#D4899A` | Secondary accent — borders, hearts, tags |
-| `--gold` | `#C9A84C` | Detail accent — stars, trim, SVG highlights |
-| `--orange-soft` | `#E8956D` | Festive accent — taco, orange slice, garland |
-| `--text-dark` | `#2D1A1F` | Body text |
-
-**Supporting values (not tokenized):**
-- `#8a6070` — muted brownish-rose for secondary/meta text
-- `#7a8c45` — sage green for leaf accents in SVGs only
-- Shadow: `0 2px 20px rgba(122,43,58,0.08–0.15)` (garnet-tinted, never grey)
-
-**Gradients:**
-- Submit button: `linear-gradient(135deg, var(--rose) 0%, var(--garnet) 100%)`
-- Hero overlay: `linear-gradient(to bottom, rgba(45,26,31,0.1) 0%, rgba(45,26,31,0.75) 100%)`
-
-### Typography
-
-| Role | Family | CSS Var | Notes |
-|------|--------|---------|-------|
-| Display / couple names | Hello Honey | `--font-display` | `clamp(72px, 18vw, 110px)`, venue name `clamp(56px, 12vw, 82px)` |
-| Handwritten secondary | The Skinny | `--font-skinny` | "¡Nos casamos!", date, "MORELIA MX", scroll indicator |
-| Script fallback | Caveat | `--font-script` | Still used for timeline, FAQ, footer titles |
-| Body / UI | Nunito | `--font-body` | Labels, body text, buttons |
-
-**Font files:** `assets/fonts/HelloHoney.otf`, `assets/fonts/TheSkinny.otf`, `assets/fonts/TheSkinny-bold.otf`
-**Rule:** Hello Honey = big emotional display. The Skinny = casual handwritten secondary. Caveat = remaining script sections. Nunito = everything functional.
-
-### Shape & Spacing Language
-- Buttons: `border-radius: 50px` (pill)
-- Cards / hotel blocks: `border-radius: 16–20px`
-- FAQ items: `border-radius: 14px`
-- Inputs: `border-radius: 50px`
-- Shadows are always garnet-tinted, never neutral grey
-
-### SVG Illustration Style
-All SVGs are inline and hand-crafted to feel drawn. Rules:
-- Use only palette colors (garnet, blush, rose, gold, orange-soft, cream, sage green for leaves)
-- No photorealistic detail — flat shapes with stroke outlines
-- Stroke colors should be a darker version of the fill (e.g., `#C9854A` outlines `#E8B87A` fill)
-- Decorative use only — never replace text with SVG text
-
-**Illustrations built:**
-
-| Section | SVG | Description |
-|---------|-----|-------------|
-| Timeline | Church | Ceremony event marker |
-| Timeline | Wedding Car | K&A getaway car |
-| Timeline | Wine Glass | Cocktail hour |
-| Timeline | Party Stars | Celebración, with music note |
-| Accommodation | Azulejo Tile | 4-petal flower tile (80×80) |
-| FAQ | Talavera Tiles (×2) | Corner decorations (80×80) |
-| Photos | Camera + Polaroid | With heart inside |
-| RSVP | Taco | Mexican food decoration |
-| RSVP | Orange Slice | Mexican food decoration |
-| Gift | Envelope + Bills | Lluvia de sobres |
-| Gift | Suitcase + Stickers | Luna de miel |
-| RSVP Thanks | Heartbeat Heart | Animated (heartbeat CSS) |
-| Footer | Small Heart | Rose, 0.7 opacity |
-
-### Section Architecture (in order)
-
-1. **Nav** — fixed, transparent → solid on scroll; ES/EN language toggle right
-2. **Hero** — full viewport; illustrated `hero.jpg` background; dark gradient overlay; Caveat display text
-3. **Location** — parallax venue photo (left) + info block (right); garnet background for info
-4. **Timeline** — large freeform illustrations; 3 individual connector curves drawn on scroll; GSAP per-connector
-5. **Accommodation** — 4 photo cards (grayscale images); country botanicals (Mexico/Colombia) as section border decorations
-6. **FAQ** — accordion; Talavera tile corner decorations; CSS max-height toggle
-7. **Photo Upload** — simple CTA section with camera/polaroid SVG
-8. **RSVP** — form sends WhatsApp to +353 83 072 4617; taco + orange slice decorations
-9. **Gift Registry** — 2-card grid: envelope (cash) + suitcase (honeymoon)
-10. **Footer** — names + heart + subtle copy
-
-### Animations
-- Hero: entrance sequence (announce → names → date), opacity + y translate, staggered
-- Location image: parallax `yPercent: 25`, scrub 1
-- Timeline path: stroke-dashoffset draw, scrub
-- Timeline events: slide in from sides (left events x:-60, right events x:+60)
-- `.reveal` class: generic fade + y:40→0 on scroll
-- Hotel cards: staggered fade + y:50 (0.15s stagger)
-- Gift cards: scale 0.85→1 + fade (0.2s stagger)
-- Photos illustration: scale 0.5→1 bounce
-- RSVP thanks heart: `heartbeat` CSS keyframe (scale 1→1.15, infinite)
-
-### Responsiveness
-- Single breakpoint: `@media (max-width: 600px)`
-- Grids collapse to 1 column
-- Timeline collapses (events stack)
-- Font sizes use `clamp()` throughout
+**TheSkinny spacing rules (CRITICAL — apply to ALL --font-skinny text):**
+1. Always apply `letter-spacing: 0.06em`
+2. Space after `¿` and `¡` openers
+3. Space after every accented letter (á, é, í, ó, ú, ñ) when immediately followed by another letter
+4. Space after `/`
+5. Space after `'`
+6. NEVER apply these rules to --font-display (HelloHoney) or --font-body (Nunito)
 
 ---
 
-## Key Decisions Made
+## Botanical Decoration Pattern (LOCKED)
 
-- **Single file** — user explicitly wants HTML/CSS/JS vanilla, no frameworks, no build step
-- **GSAP via CDN** — not npm-installed; links to cdnjs 3.12.5
-- **Hero = flat illustration** (`hero.jpg`) — not the couple photo (`pic.jpeg`). User provided the illustrated version. This is the intended hero.
-- **image3.jpeg** — placeholder venue photo. User will provide a real one. Replace `assets/image3.jpeg` when provided.
-- **WhatsApp RSVP** — number is +353 83 072 4617 (`wa.me/353830724617`). Opens in new tab with pre-filled Spanish message.
-- **Venue name** — Jardín Santa Sofía, Morelia, México
-- **Date** — 20/03/2027
+Section borders use absolutely-positioned PNG illustrations (transparent bg, 160px wide):
+- `translateY(50%) rotate(-15deg)` → peeks UP from bottom of section into next
+- `translateY(-50%) rotate(15deg)` → peeks DOWN from top of section into previous
+- `left: 50%; transform: translateX(-50%)` → centered
+- `z-index: 10`, `pointer-events: none`
+- Parent section needs `position: relative` (NOT `overflow: hidden`)
+
+**Current border decorations:**
+| Position | Asset | Class |
+|----------|-------|-------|
+| Accommodation top-center | `mexico-modified.png` | `accommodation-deco.right` (centered) |
+| Accommodation bottom-left | `colombia-modified.png` | `accommodation-deco.left` |
+| FAQ top-right | `faq-mexico.png` (butterfly+hummingbird) | `faq-deco.right` |
+| FAQ bottom-center | `faq-colombia.png` (toucan+coffee) | `faq-deco.left` (centered) |
+| Photos bottom-center | `rsvp-colombia-modified.png` (coffee+arepa) | `photos-border-deco` |
+| RSVP bottom-center | `rsvp-mexico-modified.png` (taco+tequila) | `rsvp-border-deco` |
+
+**Generated assets (cloudflare-flux + PIL bg removal):**
+- `faq-mexico.png` / `faq-mexico-modified.png` — monarch butterfly + hummingbird
+- `faq-colombia.png` / `faq-colombia-modified.png` — toucan + coffee branch
+- `rsvp-mexico.png` / `rsvp-mexico-modified.png` — taco + tequila
+- `rsvp-colombia.png` / `rsvp-colombia-modified.png` — coffee + arepa
 
 ---
 
-## User Preferences & Corrections
-- Do not use frameworks — vanilla only
-- SVG illustrations built inline, not as files
-- Inspired by "Paula y Nerea" illustrated wedding site style
-- RSVP sends to WhatsApp, not email or a backend
-- Reference images go in `reference/` folder, not root
-- Active assets go in `assets/` folder
+## Section Notes
+
+### Section 1 — Hero ✅
+- `hero-modified.png` illustration, blush background
+- HelloHoney for names, TheSkinny for "¡ Nos casamos!" + date
+
+### Section 2 — Location ✅
+- `jardin-cropped.png` parallax (`fromTo(-15, 10)`)
+- Frosted glass garnet panel, Google Maps link wired
+
+### Section 3 — Timeline ✅
+- 4 events with inline SVG illustrations, alternating L/R
+- 3 SVG connector paths drawn on scroll via GSAP
+- TheSkinny spacing applied: `Celebració n`, `Có mo`, etc.
+
+### Section 4 — Accommodation ✅
+- 4 hotel cards (grayscale photos), TheSkinny hotel names + buttons
+- `mexico-modified.png` centered at top, `colombia-modified.png` at bottom-left
+
+### Section 5 — FAQ ✅
+- HelloHoney title `clamp(48px, 10vw, 76px)`
+- TheSkinny questions (20px) + answers (16px) with full spacing rules
+- `faq-mexico.png` top-right, `faq-colombia.png` bottom-center
+- Accordion: single-open, `+` indicator fixed (`.faq-question span:first-child` scoped selector)
+
+### Section 6 — Photos ✅
+- HelloHoney title, TheSkinny body (20px)
+- Camera+polaroid SVG — `reveal` class removed (was causing flicker with dedicated GSAP animation)
+- Upload button → Knipsmig: https://knipsmig.com/pgalYgcS (placeholder — replace with real link before wedding)
+- `rsvp-colombia-modified.png` (coffee+arepa) centered at bottom border
+
+### Section 7 — RSVP ✅
+- Form: TheSkinny on all labels, inputs, toggle, submit button
+- WhatsApp: +353 83 072 4617, language-aware message (ES/EN)
+  - ES: "Nos vemos en la boda — Katia y Andrés"
+  - EN: "See you at the wedding! — Katia & Andrés"
+- Default: plus-one = No (guest field hidden)
+- Deadline: `01/ 01/ 2027` numeric format both languages
+- `rsvp-mexico-modified.png` (taco+tequila) centered at bottom border
+
+### Section 8 — Gift ✅
+- Garnet background, 2 cards (envelope SVG + suitcase SVG)
+- HelloHoney titles, TheSkinny body/lead
+- **Transfer modal on Luna de miel card:**
+  - "Contribuir" button → modal with MX / EU tabs
+  - MX: CLABE placeholder `0000 0000 0000 0000 0000` + copy button (NEEDS REAL CLABE)
+  - EU: Revolut `@username` + copy button + "Abrir Revolut" link (NEEDS REAL REVOLUT)
+  - Copy button turns green with ✓ for 2s
+  - Closes on backdrop click or ×
 
 ---
 
-## Gotchas & Pitfalls
-- `image3.jpeg` is the venue photo used in the location section — do not move it to reference
-- `hero.jpg` is the illustration (flat art), not the photo. `pic.jpeg` in reference is the actual photo and is no longer used.
-- All colors must come from CSS custom properties. Never hardcode hex in component HTML.
-- i18n: every user-facing string needs both ES and EN entries in the translations object in `index.html`
+## OG Image (Social Sharing)
+
+- `assets/og-export.html` — editable 1200×630 template (HelloHoney + TheSkinny, same brand system)
+- `assets/og-image.png` — exported PNG, regenerate with:
+  ```
+  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headless --screenshot=assets/og-image.png --window-size=1200,630 --hide-scrollbars "file:///$(pwd)/assets/og-export.html"
+  ```
+- Layout: text left, hero illustration absolutely positioned right (names overlap image), butterfly+hummingbird top-left, toucan+coffee bottom-left
+- Meta tags added to `index.html` — replace `PLACEHOLDER_DOMAIN` with real URL after deploy
+
+---
+
+## Open Items
+
+### Before wedding:
+- [ ] Replace `PLACEHOLDER_DOMAIN` in `index.html` OG/Twitter meta tags with real deployed URL
+- [ ] Replace Knipsmig link with real upload event link (Photos section)
+- [ ] Fill in real MX CLABE number in transfer modal HTML (`0000 0000 0000 0000 0000`)
+- [ ] Fill in real Revolut username (`@username`) and link (`https://revolut.me/username`)
+- [ ] Set up deployment (GitHub Pages or Netlify — TBD)
+
+### Remaining design work:
+- [ ] Footer review — fonts not yet matched
+- [ ] Nav review — fonts not yet checked
+- [ ] Gift section bottom border decoration (nothing peeking into footer yet)
+- [ ] Final venue photo — user will provide, drop in `assets/`
+- [ ] Hotel Google Maps links — currently generic, user may want direct links
 
 ---
 
@@ -188,20 +139,27 @@ All SVGs are inline and hand-crafted to feel drawn. Rules:
 
 | File | What it is |
 |------|-----------|
-| `index.html` | Entire site — HTML + CSS + JS in one file |
-| `assets/hero.jpg` | Illustrated hero — flat art of Katia y Andrés with giant ring |
-| `assets/jardin.jpg` | Venue exterior photo — Jardín Santa Sofía, Morelia |
-| `assets/jardin-cropped.png` | Cropped venue photo used in location section |
-| `assets/hotel1-4.jpg` | Hotel photos for accommodation cards |
-| `assets/mexico-modified.png` | Marigolds + cactus illustration (transparent bg) — Katia/Mexico deco |
-| `assets/colombia-modified.png` | Orchids illustration (transparent bg) — Andrés/Colombia deco |
-| `reference/pic.jpeg` | Original couple photo (not used on site, kept for reference) |
-| `tasks/handover.md` | This file — style guide + session state |
+| `index.html` | Entire site — HTML + CSS + JS |
+| `assets/hero-modified.png` | Illustrated hero (transparent bg) |
+| `assets/jardin-cropped.png` | Venue photo for location section |
+| `assets/hotel1-4.jpg` | Hotel photos (accommodation) |
+| `assets/mexico-modified.png` | Marigolds + cactus (Katia/Mexico) |
+| `assets/colombia-modified.png` | Orchids (Andrés/Colombia) |
+| `assets/faq-mexico-modified.png` | Butterfly + hummingbird (FAQ) |
+| `assets/faq-colombia-modified.png` | Toucan + coffee (FAQ) |
+| `assets/rsvp-mexico-modified.png` | Taco + tequila (Photos→RSVP border) |
+| `assets/rsvp-colombia-modified.png` | Coffee + arepa (RSVP→Gift border) |
+| `assets/og-export.html` | Editable OG image template (1200×630) |
+| `assets/og-image.png` | Exported OG image for social sharing |
+| `tasks/handover.md` | This file |
+| `tasks/context.md` | Corrections log + TheSkinny rules |
 
 ---
 
-## Open Questions
-- Deployment: GitHub Pages or Netlify? (ask user)
-- Final venue photo: user will provide — drop in `assets/`, likely rename to `venue.jpg`
-- Any additional sections needed? (Dress code, transport info, etc.)
-- Google Maps link for venue: currently a placeholder `#` — needs real URL
+## Key Decisions
+- Single vanilla HTML file, no frameworks, no build step
+- GSAP via CDN (cdnjs 3.12.5)
+- WhatsApp RSVP — opens wa.me link with pre-filled message, language-aware
+- Botanical images generated via cloudflare-flux, bg removed with PIL
+- All botanical images: generated + `-modified` (transparent bg) versions kept
+- TheSkinny spacing rules apply to all --font-skinny text — logged in context.md
