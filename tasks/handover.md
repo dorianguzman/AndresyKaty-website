@@ -126,6 +126,7 @@ Section borders use absolutely-positioned PNG illustrations (transparent bg, 160
 
 ### Done:
 - [x] Domain live at `andresykaty.com` (Cloudflare Pages)
+- [x] OG image confirmed working (`og-image.png` renders on WhatsApp/social previews)
 - [x] OG meta tags set with real domain
 - [x] Venue photo (`jardin-cropped.png`) confirmed correct
 - [x] Hotel Google Maps links — left as generic (accepted)
