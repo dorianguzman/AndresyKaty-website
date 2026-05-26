@@ -20,11 +20,17 @@ Boho illustrated style, bilingual ES/EN, GSAP animations, WhatsApp RSVP.
 
 ## Up Next
 
-### Phase 2 — Polish & Content
+### Phase 2 — Section-by-section reference improvements
 - [x] Replace placeholder venue photo → `assets/jardin.jpg`
-- [ ] Add real Google Maps link for venue (currently `#`)
-- [ ] Review all Spanish copy with user (venue name, FAQ answers, etc.)
-- [ ] Any missing sections? (dress code, transport, parking)
+- [x] Add real Google Maps link → https://maps.app.goo.gl/sxftxGoN9pgtngFC6
+- [x] Section 1 — Hero (blush bg, Hello Honey/Skinny fonts, illustration, date, scroll indicator)
+- [x] Section 2 — Location (Hello Honey venue name, Maps link, parallax fix)
+- [ ] Section 3 — Timeline
+- [ ] Section 4 — Accommodation
+- [ ] Section 5 — FAQ
+- [ ] Section 6 — Photos
+- [ ] Section 7 — RSVP
+- [ ] Section 8 — Gift Registry
 
 ### Phase 3 — Deploy
 - [ ] Choose hosting: GitHub Pages or Netlify

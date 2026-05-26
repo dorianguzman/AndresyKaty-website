@@ -205,17 +205,17 @@
       font-family: var(--font-body);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 3px;
+      letter-spacing: 8px;
       text-transform: uppercase;
       color: var(--rose);
       margin-bottom: 14px;
     }
     .location-venue {
-      font-family: var(--font-script);
-      font-size: clamp(38px, 8vw, 56px);
+      font-family: var(--font-display);
+      font-size: clamp(56px, 12vw, 82px);
       color: #fff;
       margin-bottom: 8px;
-      line-height: 1.1;
+      line-height: 1.0;
     }
     .location-city {
       font-family: var(--font-body);
@@ -237,12 +237,12 @@
       transition: all 0.25s;
     }
     .btn-outline-light {
-      border: 2px solid rgba(255,255,255,0.5);
+      border: 2px solid rgba(255,255,255,0.6);
       color: #fff;
       background: transparent;
     }
     .btn-outline-light:hover {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.15);
       border-color: #fff;
     }
 
@@ -788,7 +788,7 @@
     <p class="location-label reveal" data-i18n="location_label">Ubicación</p>
     <h2 class="location-venue reveal" data-i18n="location_venue">Jardín Santa Sofía</h2>
     <p class="location-city reveal" data-i18n="location_city">Morelia, México</p>
-    <a href="https://maps.google.com" target="_blank" class="btn-pill btn-outline-light reveal" data-i18n="location_btn">Cómo llegar →</a>
+    <a href="https://maps.app.goo.gl/sxftxGoN9pgtngFC6" target="_blank" class="btn-pill btn-outline-light reveal" data-i18n="location_btn">Cómo llegar →</a>
   </div>
 </section>
 
@@ -1469,9 +1469,9 @@
     gsap.to('.hero-names',    { opacity: 1, y: 0, duration: 1.2, delay: 0.6, ease: 'power2.out' });
 
     // Location parallax
-    gsap.to('.location-img', {
-      yPercent: 25,
-      ease: 'none',
+    gsap.fromTo('.location-img',
+      { yPercent: -15 },
+      { yPercent: 10, ease: 'none',
       scrollTrigger: {
         trigger: '.location',
         start: 'top bottom',

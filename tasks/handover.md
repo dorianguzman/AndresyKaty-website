@@ -1,12 +1,31 @@
 # Handover — AndresyKaty Website
 
 ## Current State
-- **Status:** V1 complete and pushed to GitHub
-- **Live file:** `index.html` (1,498 lines, single-file, no build)
+- **Status:** Section-by-section reference improvements in progress
+- **Live file:** `index.html` (single-file, no build)
 - **Repo:** https://github.com/dorianguzman/AndresyKaty-website
-- **Open items:**
-  - ~~Venue photo~~ → done, `assets/jardin.jpg` in place
-  - No deployment set up yet (GitHub Pages or Netlify — TBD)
+- **Completed sections:** Hero (1) ✅, Location (2) ✅
+- **Remaining sections:** Timeline (3), Accommodation (4), FAQ (5), Photos (6), RSVP (7), Gift (8)
+
+### Section 1 — Hero (done)
+- Blush `#FCF0F2` background, no dark overlay
+- `hero-modified.png` as foreground illustration (transparent bg)
+- **Hello Honey** for names (`--font-display`), **The Skinny** for "¡Nos casamos!" + date (`--font-skinny`)
+- Date moved into nav (aligned with ES/EN buttons)
+- "MORELIA, MX" below illustration in The Skinny
+- Scroll indicator at bottom center (bouncing animation)
+- ES/EN buttons: The Skinny bold, black border, rose fill on active
+
+### Section 2 — Location (done)
+- Photo 55vh, solid garnet band below (kept solid — user explicitly reverted)
+- Venue name: Hello Honey, `clamp(56px, 12vw, 82px)`, white
+- "UBICACIÓN" label: `8px` letter-spacing
+- Google Maps link: https://maps.app.goo.gl/sxftxGoN9pgtngFC6
+- Parallax fixed: `fromTo(-15, 10)` so image never shows background gap
+
+### Open items
+- Sections 3–8 still to review against reference
+- No deployment set up yet (GitHub Pages or Netlify — TBD)
 
 ---
 
@@ -43,17 +62,15 @@ Key adjectives: **warm, intimate, slightly playful, artisanal, not corporate.**
 
 ### Typography
 
-| Role | Family | Weight | Notes |
-|------|--------|--------|-------|
-| Display / hero names | Caveat | 700 | `clamp(52px, 10vw, 80px)` |
-| Section titles | Caveat | default | `clamp(36–44px, 7–8vw, 52–60px)` |
-| Timeline event labels | Caveat | default | 26px |
-| Footer names | Caveat | default | 26px |
-| Body / UI | Nunito | 300–700 | Default 14–15px |
-| Labels (form, caps) | Nunito | 600 | Uppercase, `letter-spacing: 0.5–3px` |
-| Nav / date | Caveat | default | 16px, `letter-spacing: 1–4px` |
+| Role | Family | CSS Var | Notes |
+|------|--------|---------|-------|
+| Display / couple names | Hello Honey | `--font-display` | `clamp(72px, 18vw, 110px)`, venue name `clamp(56px, 12vw, 82px)` |
+| Handwritten secondary | The Skinny | `--font-skinny` | "¡Nos casamos!", date, "MORELIA MX", scroll indicator |
+| Script fallback | Caveat | `--font-script` | Still used for timeline, FAQ, footer titles |
+| Body / UI | Nunito | `--font-body` | Labels, body text, buttons |
 
-**Rule:** Caveat for anything emotional or display. Nunito for anything functional or small. Never swap them.
+**Font files:** `assets/fonts/HelloHoney.otf`, `assets/fonts/TheSkinny.otf`, `assets/fonts/TheSkinny-bold.otf`
+**Rule:** Hello Honey = big emotional display. The Skinny = casual handwritten secondary. Caveat = remaining script sections. Nunito = everything functional.
 
 ### Shape & Spacing Language
 - Buttons: `border-radius: 50px` (pill)
