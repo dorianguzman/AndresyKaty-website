@@ -5,8 +5,7 @@
 - **Live file:** `index.html` (1,498 lines, single-file, no build)
 - **Repo:** https://github.com/dorianguzman/AndresyKaty-website
 - **Open items:**
-  - User will provide a venue photo → drop into `assets/`, replace `image3.jpeg`
-  - Venue photo reference will be `assets/venue.jpg` (or whatever format provided)
+  - ~~Venue photo~~ → done, `assets/jardin.jpg` in place
   - No deployment set up yet (GitHub Pages or Netlify — TBD)
 
 ---
@@ -156,7 +155,7 @@ All SVGs are inline and hand-crafted to feel drawn. Rules:
 |------|-----------|
 | `index.html` | Entire site — HTML + CSS + JS in one file |
 | `assets/hero.jpg` | Illustrated hero — flat art of Katia y Andrés with giant ring |
-| `assets/image3.jpeg` | Venue exterior placeholder — replace when user provides real photo |
+| `assets/jardin.jpg` | Venue exterior photo — Jardín Santa Sofía, Morelia |
 | `reference/pic.jpeg` | Original couple photo (not used on site, kept for reference) |
 | `tasks/handover.md` | This file — style guide + session state |
 

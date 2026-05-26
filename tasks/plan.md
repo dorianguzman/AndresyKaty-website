@@ -21,7 +21,7 @@ Boho illustrated style, bilingual ES/EN, GSAP animations, WhatsApp RSVP.
 ## Up Next
 
 ### Phase 2 — Polish & Content
-- [ ] Replace `assets/image3.jpeg` with final venue photo (user to provide)
+- [x] Replace placeholder venue photo → `assets/jardin.jpg`
 - [ ] Add real Google Maps link for venue (currently `#`)
 - [ ] Review all Spanish copy with user (venue name, FAQ answers, etc.)
 - [ ] Any missing sections? (dress code, transport, parking)
