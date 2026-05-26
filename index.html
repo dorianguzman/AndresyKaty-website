@@ -1363,8 +1363,8 @@
       yesBtn.classList.remove('active');
     }
   }
-  // Default: yes
-  setPlusOne(true);
+  // Default: no
+  setPlusOne(false);
 
   /* ── RSVP submit ── */
   function submitRsvp(e) {
@@ -1375,13 +1375,24 @@
     const guest = document.getElementById('rsvp-guest').value.trim();
     const dietary = document.getElementById('rsvp-dietary').value.trim();
 
-    let msg = `🎊 Confirmación de asistencia — Katia y Andrés\n`;
-    if (nickname) msg += `Apodo: ${nickname}\n`;
-    msg += `Nombre: ${fullname}\n`;
-    if (plusOne && guest) msg += `Acompañante: ${guest}\n`;
-    else if (plusOne) msg += `Acompañante: Sí\n`;
-    else msg += `Acompañante: No\n`;
-    if (dietary) msg += `Alergias: ${dietary}`;
+    let msg;
+    if (currentLang === 'en') {
+      msg = `See you at the wedding! — Katia & Andrés\n`;
+      if (nickname) msg += `Nickname: ${nickname}\n`;
+      msg += `Name: ${fullname}\n`;
+      if (plusOne && guest) msg += `Guest: ${guest}\n`;
+      else if (plusOne) msg += `Guest: Yes\n`;
+      else msg += `Guest: No\n`;
+      if (dietary) msg += `Dietary: ${dietary}`;
+    } else {
+      msg = `Nos vemos en la boda — Katia y Andrés\n`;
+      if (nickname) msg += `Apodo: ${nickname}\n`;
+      msg += `Nombre: ${fullname}\n`;
+      if (plusOne && guest) msg += `Acompañante: ${guest}\n`;
+      else if (plusOne) msg += `Acompañante: Sí\n`;
+      else msg += `Acompañante: No\n`;
+      if (dietary) msg += `Alergias: ${dietary}`;
+    }
 
     window.open(`https://wa.me/353830724617?text=${encodeURIComponent(msg)}`, '_blank');
 
