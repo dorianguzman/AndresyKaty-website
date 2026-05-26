@@ -73,43 +73,35 @@
       box-shadow: 0 2px 20px rgba(122,43,58,0.08);
     }
     .nav-date {
-      font-family: var(--font-script);
-      font-size: 16px;
-      color: var(--cream);
+      font-family: var(--font-skinny);
+      font-size: 32px;
+      font-weight: normal;
+      color: var(--text-dark);
       letter-spacing: 1px;
-      transition: color 0.4s;
     }
-    .nav.solid .nav-date { color: var(--garnet); }
     .lang-toggle {
       display: flex;
-      gap: 4px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 20px;
+      gap: 6px;
+      background: transparent;
       padding: 3px;
-      transition: background 0.4s;
     }
-    .nav.solid .lang-toggle { background: rgba(122,43,58,0.08); }
     .lang-btn {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      padding: 5px 12px;
-      border-radius: 16px;
-      border: none;
+      font-family: var(--font-skinny);
+      font-size: 15px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1.5px solid var(--text-dark);
       cursor: pointer;
       background: transparent;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-dark);
       transition: all 0.25s;
     }
-    .nav.solid .lang-btn { color: var(--garnet); }
     .lang-btn.active {
       background: var(--rose);
-      color: #fff;
-    }
-    .nav.solid .lang-btn.active {
-      background: var(--rose);
-      color: #fff;
+      color: var(--text-dark);
+      border-color: var(--text-dark);
     }
 
     /* ── HERO ── */
@@ -141,7 +133,7 @@
       font-weight: bold;
       color: var(--text-dark);
       letter-spacing: 3px;
-      margin-bottom: 8px;
+      margin-bottom: 24px;
       opacity: 0;
     }
     .hero-exclaim { margin-right: 8px; }
@@ -153,32 +145,39 @@
       color: var(--text-dark);
       margin-top: 8px;
     }
+    .hero-scroll {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-skinny);
+      font-size: clamp(13px, 2vw, 17px);
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: var(--text-dark);
+      opacity: 0.6;
+      animation: scrollBounce 2s ease-in-out infinite;
+      white-space: nowrap;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
     .hero-names {
       font-family: var(--font-display);
       font-size: clamp(72px, 18vw, 110px);
       color: var(--text-dark);
       line-height: 0.95;
-      margin-bottom: 16px;
+      margin-bottom: 4px;
       max-width: 600px;
       opacity: 0;
-    }
-    .hero-date {
-      position: absolute;
-      top: 28px;
-      left: 28px;
-      font-family: var(--font-skinny);
-      font-size: 28px;
-      color: var(--text-dark);
-      letter-spacing: 0;
-      opacity: 0;
-      z-index: 3;
     }
     .hero-illustration {
       display: block;
       width: min(480px, 90vw);
       max-height: 55vh;
       object-fit: contain;
-      margin-top: 20px;
+      margin-top: 4px;
       flex-shrink: 0;
     }
 
@@ -768,13 +767,13 @@
      2. HERO
 ═══════════════════════════════════════ -->
 <section class="hero" id="hero">
-  <p class="hero-date" data-i18n="hero_date">20.03.2027</p>
   <div class="hero-content">
     <p class="hero-announce"><span class="hero-exclaim">¡</span>Nos casamos!</p>
     <h1 class="hero-names">Katia y Andrés</h1>
     <img src="./assets/hero-modified.png" alt="Katia y Andrés" class="hero-illustration" />
     <p class="hero-location">MORELIA, MX</p>
   </div>
+  <div class="hero-scroll">scroll ↓</div>
 </section>
 
 
@@ -1465,11 +1464,9 @@
     // Hero entrance — set initial states first, then animate to final
     gsap.set('.hero-announce', { opacity: 0, y: 30 });
     gsap.set('.hero-names',    { opacity: 0, y: 50 });
-    gsap.set('.hero-date',     { opacity: 0, y: 20 });
 
     gsap.to('.hero-announce', { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power2.out' });
     gsap.to('.hero-names',    { opacity: 1, y: 0, duration: 1.2, delay: 0.6, ease: 'power2.out' });
-    gsap.to('.hero-date',     { opacity: 1, y: 0, duration: 1, delay: 1, ease: 'power2.out' });
 
     // Location parallax
     gsap.to('.location-img', {
