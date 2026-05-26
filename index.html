@@ -448,7 +448,7 @@
       opacity: 0.45;
     }
     .faq-title {
-      font-family: var(--font-script);
+      font-family: var(--font-display);
       font-size: clamp(36px, 7vw, 52px);
       color: var(--garnet);
       text-align: center;
@@ -476,10 +476,11 @@
       gap: 16px;
       user-select: none;
     }
-    .faq-question span {
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 600;
+    .faq-question span:first-child {
+      font-family: var(--font-skinny);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
       color: var(--text-dark);
       flex: 1;
     }
@@ -488,7 +489,7 @@
       color: var(--rose);
       font-weight: 300;
       line-height: 1;
-      flex-shrink: 0;
+      flex: 0 0 auto;
       transition: transform 0.3s;
     }
     .faq-answer-wrap {
@@ -498,8 +499,9 @@
     }
     .faq-answer {
       padding: 0 24px 20px;
-      font-family: var(--font-body);
-      font-size: 14px;
+      font-family: var(--font-skinny);
+      font-size: 16px;
+      letter-spacing: 0.06em;
       color: #8a6070;
       line-height: 1.6;
     }
@@ -1030,38 +1032,38 @@
   <div class="faq-list">
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        <span data-i18n="faq_q1">¿Cuál es la etiqueta de vestimenta?</span>
+        <span data-i18n="faq_q1">¿ Cuá l es la etiqueta de vestimenta?</span>
         <span class="faq-indicator">+</span>
       </div>
       <div class="faq-answer-wrap">
-        <p class="faq-answer" data-i18n="faq_a1">El blanco está reservado para la novia. ¡Ven tan elegante como quieras!</p>
+        <p class="faq-answer" data-i18n="faq_a1">El blanco está reservado para la novia. ¡ Ven tan elegante como quieras!</p>
       </div>
     </div>
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        <span data-i18n="faq_q2">¿Hay estacionamiento en el salón?</span>
+        <span data-i18n="faq_q2">¿ Hay estacionamiento en el saló n ?</span>
         <span class="faq-indicator">+</span>
       </div>
       <div class="faq-answer-wrap">
-        <p class="faq-answer" data-i18n="faq_a2">Sí, Jardín Santa Sofía cuenta con estacionamiento amplio para los invitados.</p>
+        <p class="faq-answer" data-i18n="faq_a2">Sí, Jardí n Santa Sofí a cuenta con estacionamiento amplio para los invitados.</p>
       </div>
     </div>
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        <span data-i18n="faq_q3">¿Habrá transporte de la iglesia al salón?</span>
+        <span data-i18n="faq_q3">¿ Habrá transporte de la iglesia al saló n ?</span>
         <span class="faq-indicator">+</span>
       </div>
       <div class="faq-answer-wrap">
-        <p class="faq-answer" data-i18n="faq_a3">Confirmaremos los detalles próximamente. ¡Estén pendientes!</p>
+        <p class="faq-answer" data-i18n="faq_a3">Confirmaremos los detalles pró ximamente. ¡ Esté n pendientes!</p>
       </div>
     </div>
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        <span data-i18n="faq_q4">¿Habrá transporte al finalizar la celebración?</span>
+        <span data-i18n="faq_q4">¿ Habrá transporte al finalizar la celebració n ?</span>
         <span class="faq-indicator">+</span>
       </div>
       <div class="faq-answer-wrap">
-        <p class="faq-answer" data-i18n="faq_a4">Confirmaremos los detalles próximamente.</p>
+        <p class="faq-answer" data-i18n="faq_a4">Confirmaremos los detalles pró ximamente.</p>
       </div>
     </div>
   </div>
@@ -1275,14 +1277,14 @@
       accommodation_title: '¿Dónde hospedarse?',
       accommodation_btn: 'Có mo llegar',
       faq_title: 'Antes de que preguntes...',
-      faq_q1: '¿Cuál es la etiqueta de vestimenta?',
-      faq_a1: 'El blanco está reservado para la novia. ¡Ven tan elegante como quieras!',
-      faq_q2: '¿Hay estacionamiento en el salón?',
-      faq_a2: 'Sí, Jardín Santa Sofía cuenta con estacionamiento amplio para los invitados.',
-      faq_q3: '¿Habrá transporte de la iglesia al salón?',
-      faq_a3: 'Confirmaremos los detalles próximamente. ¡Estén pendientes!',
-      faq_q4: '¿Habrá transporte al finalizar la celebración?',
-      faq_a4: 'Confirmaremos los detalles próximamente.',
+      faq_q1: '¿ Cuá l es la etiqueta de vestimenta?',
+      faq_a1: 'El blanco está reservado para la novia. ¡ Ven tan elegante como quieras!',
+      faq_q2: '¿ Hay estacionamiento en el saló n ?',
+      faq_a2: 'Sí, Jardí n Santa Sofí a cuenta con estacionamiento amplio para los invitados.',
+      faq_q3: '¿ Habrá transporte de la iglesia al saló n ?',
+      faq_a3: 'Confirmaremos los detalles pró ximamente. ¡ Esté n pendientes!',
+      faq_q4: '¿ Habrá transporte al finalizar la celebració n ?',
+      faq_a4: 'Confirmaremos los detalles pró ximamente.',
       photos_title: '¡Queremos ver tus fotos!',
       photos_body: 'Aquí podrás subir los vídeos y fotos que captures durante el día',
       photos_btn: 'Súbelas aquí →',
