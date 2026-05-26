@@ -4,8 +4,8 @@
 - **Status:** Section-by-section reference improvements in progress
 - **Live file:** `index.html` (single-file, no build)
 - **Repo:** https://github.com/dorianguzman/AndresyKaty-website
-- **Completed sections:** Hero (1) ✅, Location (2) ✅
-- **Remaining sections:** Timeline (3), Accommodation (4), FAQ (5), Photos (6), RSVP (7), Gift (8)
+- **Completed sections:** Hero (1) ✅, Location (2) ✅, Timeline (3) ✅, Accommodation (4) ✅
+- **Remaining sections:** FAQ (5), Photos (6), RSVP (7), Gift (8)
 
 ### Section 1 — Hero (done)
 - Blush `#FCF0F2` background, no dark overlay
@@ -17,15 +17,33 @@
 - ES/EN buttons: The Skinny bold, black border, rose fill on active
 
 ### Section 2 — Location (done)
-- Photo 55vh, solid garnet band below (kept solid — user explicitly reverted)
+- Venue image fills full section as absolute background layer
+- Garnet info panel overlaps bottom with `margin-top: 50vh`, frosted glass: `rgba(122,43,58,0.82)` + `backdrop-filter: blur(8px)`
+- Using `jardin-cropped.png` (cropped venue photo, user-provided)
 - Venue name: Hello Honey, `clamp(56px, 12vw, 82px)`, white
-- "UBICACIÓN" label: `8px` letter-spacing
 - Google Maps link: https://maps.app.goo.gl/sxftxGoN9pgtngFC6
-- Parallax fixed: `fromTo(-15, 10)` so image never shows background gap
+- Parallax: `fromTo(-15, 10)` scrub
+
+### Section 3 — Timeline (done)
+- Rebuilt: large freeform illustrations (no icon circles), alternating left/right layout
+- **Hello Honey** for "timeline" title, **The Skinny** for event labels (Ceremonia, Bienvenida, etc.)
+- 3 individual connector SVGs between events: loop (tlc1), S-curve left (tlc2), gentle curve (tlc3) — each draws on scroll via GSAP
+- Ceremonia links to Google Maps: https://maps.app.goo.gl/ztnASWmWhxs6tocS8
+- TheSkinny accent fix: space after ó in "Celebraci ó n", "Có mo", "Misió n"
+- Mobile: alternating left/right layout preserved (no column collapse)
+
+### Section 4 — Accommodation (done)
+- **Hello Honey** title, **The Skinny** for hotel names + "Có mo llegar" buttons
+- Photo cards: hotel name (uppercase label) → photo (grayscale filter) → button
+- Hotel photos: `hotel1-4.jpg` in assets, wired in order
+- Country decorations: `mexico-modified.png` (marigolds + cactus) at top border (between timeline and accommodation), `colombia-modified.png` (orchids) at bottom border (between accommodation and FAQ)
+- Decorations: 160px, rotated ±15°, z-index: 10, overflow removed from accommodation + FAQ
+- Andrés = Colombia, Katia = Mexico
 
 ### Open items
-- Sections 3–8 still to review against reference
+- FAQ (5), Photos (6), RSVP (7), Gift (8) still to review
 - No deployment set up yet (GitHub Pages or Netlify — TBD)
+- Hotel Google Maps links are generic queries — user may want to update with direct links
 
 ---
 
@@ -109,8 +127,8 @@ All SVGs are inline and hand-crafted to feel drawn. Rules:
 1. **Nav** — fixed, transparent → solid on scroll; ES/EN language toggle right
 2. **Hero** — full viewport; illustrated `hero.jpg` background; dark gradient overlay; Caveat display text
 3. **Location** — parallax venue photo (left) + info block (right); garnet background for info
-4. **Timeline** — vertical SVG path drawn on scroll; alternating left/right events; GSAP scrub
-5. **Accommodation** — 4 hotel cards with address + link; subtle garnet shadows
+4. **Timeline** — large freeform illustrations; 3 individual connector curves drawn on scroll; GSAP per-connector
+5. **Accommodation** — 4 photo cards (grayscale images); country botanicals (Mexico/Colombia) as section border decorations
 6. **FAQ** — accordion; Talavera tile corner decorations; CSS max-height toggle
 7. **Photo Upload** — simple CTA section with camera/polaroid SVG
 8. **RSVP** — form sends WhatsApp to +353 83 072 4617; taco + orange slice decorations
@@ -173,6 +191,10 @@ All SVGs are inline and hand-crafted to feel drawn. Rules:
 | `index.html` | Entire site — HTML + CSS + JS in one file |
 | `assets/hero.jpg` | Illustrated hero — flat art of Katia y Andrés with giant ring |
 | `assets/jardin.jpg` | Venue exterior photo — Jardín Santa Sofía, Morelia |
+| `assets/jardin-cropped.png` | Cropped venue photo used in location section |
+| `assets/hotel1-4.jpg` | Hotel photos for accommodation cards |
+| `assets/mexico-modified.png` | Marigolds + cactus illustration (transparent bg) — Katia/Mexico deco |
+| `assets/colombia-modified.png` | Orchids illustration (transparent bg) — Andrés/Colombia deco |
 | `reference/pic.jpeg` | Original couple photo (not used on site, kept for reference) |
 | `tasks/handover.md` | This file — style guide + session state |
 

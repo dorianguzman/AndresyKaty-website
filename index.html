@@ -341,12 +341,23 @@
       background: var(--garnet);
       padding: 80px 24px 90px;
       position: relative;
-      overflow: hidden;
     }
     .accommodation-deco {
       position: absolute;
-      top: 24px; right: 24px;
-      opacity: 0.25;
+      width: 160px;
+      opacity: 1;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .accommodation-deco.left {
+      bottom: 0;
+      left: 16px;
+      transform: translateY(50%) rotate(-15deg);
+    }
+    .accommodation-deco.right {
+      top: 0;
+      right: 16px;
+      transform: translateY(-50%) rotate(15deg);
     }
     .accommodation-title {
       font-family: var(--font-display);
@@ -423,7 +434,6 @@
       background: var(--cream);
       padding: 80px 24px 90px;
       position: relative;
-      overflow: hidden;
     }
     .faq-deco-tr {
       position: absolute;
@@ -931,25 +941,8 @@
      5. ACCOMMODATION
 ═══════════════════════════════════════ -->
 <section class="accommodation" id="accommodation">
-  <div class="accommodation-deco">
-    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="1" y="1" width="78" height="78" rx="4" fill="#FDF6F0" stroke="#FCF0F2" stroke-width="2"/>
-      <rect x="5" y="5" width="70" height="70" rx="2" fill="none" stroke="#FCF0F2" stroke-width="1.5"/>
-      <path d="M40 20 Q50 30 40 40 Q30 30 40 20 Z" fill="#FCF0F2" opacity="0.7"/>
-      <path d="M60 40 Q50 50 40 40 Q50 30 60 40 Z" fill="#FCF0F2" opacity="0.7"/>
-      <path d="M40 60 Q30 50 40 40 Q50 50 40 60 Z" fill="#FCF0F2" opacity="0.7"/>
-      <path d="M20 40 Q30 30 40 40 Q30 50 20 40 Z" fill="#FCF0F2" opacity="0.7"/>
-      <circle cx="40" cy="40" r="5" fill="#E8956D" opacity="0.6"/>
-      <circle cx="14" cy="14" r="4" fill="#FCF0F2" opacity="0.5"/>
-      <circle cx="66" cy="14" r="4" fill="#FCF0F2" opacity="0.5"/>
-      <circle cx="14" cy="66" r="4" fill="#FCF0F2" opacity="0.5"/>
-      <circle cx="66" cy="66" r="4" fill="#FCF0F2" opacity="0.5"/>
-      <line x1="40" y1="5" x2="40" y2="18" stroke="#FCF0F2" stroke-width="1" opacity="0.4"/>
-      <line x1="40" y1="62" x2="40" y2="75" stroke="#FCF0F2" stroke-width="1" opacity="0.4"/>
-      <line x1="5" y1="40" x2="18" y2="40" stroke="#FCF0F2" stroke-width="1" opacity="0.4"/>
-      <line x1="62" y1="40" x2="75" y2="40" stroke="#FCF0F2" stroke-width="1" opacity="0.4"/>
-    </svg>
-  </div>
+  <img class="accommodation-deco left" src="./assets/colombia-modified.png" alt="Colombia" />
+  <img class="accommodation-deco right" src="./assets/mexico-modified.png" alt="México" />
 
   <h2 class="accommodation-title reveal" data-i18n="accommodation_title">¿Dónde hospedarse?</h2>
 
