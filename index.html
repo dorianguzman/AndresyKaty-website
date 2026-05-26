@@ -714,16 +714,16 @@
       position: relative;
     }
     .gift-title {
-      font-family: var(--font-script);
-      font-size: clamp(36px, 7vw, 52px);
+      font-family: var(--font-display);
+      font-size: clamp(48px, 10vw, 76px);
       color: #fff;
       text-align: center;
       margin-bottom: 16px;
     }
     .gift-lead {
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-style: italic;
+      font-family: var(--font-skinny);
+      font-size: 20px;
+      letter-spacing: 0.06em;
       color: rgba(255,255,255,0.75);
       text-align: center;
       max-width: 460px;
@@ -748,16 +748,154 @@
       gap: 12px;
     }
     .gift-card-title {
-      font-family: var(--font-script);
-      font-size: 24px;
+      font-family: var(--font-display);
+      font-size: 28px;
       color: var(--garnet);
     }
     .gift-card-body {
-      font-family: var(--font-body);
-      font-size: 13px;
+      font-family: var(--font-skinny);
+      font-size: 16px;
+      letter-spacing: 0.06em;
       color: #8a6070;
       line-height: 1.6;
     }
+
+    /* ── TRANSFER MODAL ── */
+    .btn-transfer {
+      font-family: var(--font-skinny);
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      padding: 12px 32px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      background: var(--garnet);
+      color: #fff;
+      margin-top: 8px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-transfer:hover { background: var(--garnet-dark); transform: translateY(-2px); }
+    .transfer-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(44,10,15,0.55);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .transfer-modal-overlay.open { display: flex; }
+    .transfer-modal {
+      background: var(--cream);
+      border-radius: 24px;
+      padding: 40px 32px 36px;
+      max-width: 380px;
+      width: 90%;
+      position: relative;
+      text-align: center;
+    }
+    .transfer-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      background: none; border: none;
+      font-size: 24px; color: var(--rose);
+      cursor: pointer; line-height: 1;
+    }
+    .transfer-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 6vw, 40px);
+      color: var(--garnet);
+      margin-bottom: 24px;
+    }
+    .transfer-tabs {
+      display: flex;
+      gap: 0;
+      background: #fff;
+      border-radius: 50px;
+      border: 2px solid rgba(212,137,154,0.25);
+      overflow: hidden;
+      width: fit-content;
+      margin: 0 auto 28px;
+    }
+    .transfer-tab {
+      font-family: var(--font-skinny);
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      font-weight: 400;
+      padding: 10px 24px;
+      border: none;
+      background: transparent;
+      color: #8a6070;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .transfer-tab.active {
+      background: var(--rose);
+      color: #fff;
+      border-radius: 50px;
+    }
+    .transfer-panel { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .transfer-panel.hidden { display: none; }
+    .transfer-label {
+      font-family: var(--font-skinny);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      color: #8a6070;
+      text-transform: uppercase;
+    }
+    .transfer-detail-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border-radius: 50px;
+      padding: 12px 20px;
+      border: 2px solid rgba(212,137,154,0.25);
+      width: 100%;
+      justify-content: space-between;
+    }
+    .transfer-detail {
+      font-family: var(--font-skinny);
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      color: var(--text-dark);
+    }
+    .btn-copy {
+      font-family: var(--font-skinny);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      padding: 6px 16px;
+      border-radius: 50px;
+      border: none;
+      background: var(--garnet);
+      color: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .btn-copy:hover { background: var(--garnet-dark); }
+    .btn-copy.copied { background: #5a8a5a; }
+    .transfer-bank, .transfer-name {
+      font-family: var(--font-skinny);
+      font-size: 15px;
+      letter-spacing: 0.06em;
+      color: #8a6070;
+    }
+    .btn-revolut {
+      font-family: var(--font-skinny);
+      font-size: 18px;
+      letter-spacing: 0.06em;
+      padding: 12px 32px;
+      border-radius: 50px;
+      background: #191C1F;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 4px;
+      transition: opacity 0.2s;
+    }
+    .btn-revolut:hover { opacity: 0.85; }
 
     /* ── FOOTER ── */
     .footer {
@@ -1134,7 +1272,7 @@
 ═══════════════════════════════════════ -->
 <section class="gift-section" id="gift">
   <h2 class="gift-title reveal" data-i18n="gift_title">Mesa de regalos</h2>
-  <p class="gift-lead reveal" data-i18n="gift_lead">Nos encantaría llevarnos algún detalle de tu parte… pero ya venimos con la maleta llena.</p>
+  <p class="gift-lead reveal" data-i18n="gift_lead">Nos encantarí a llevarnos algú n detalle de tu parte… pero ya venimos con la maleta llena.</p>
 
   <div class="gifts-grid">
     <!-- Card 1 — Lluvia de sobres -->
@@ -1155,7 +1293,7 @@
         <line x1="92" y1="76" x2="50" y2="52" stroke="var(--garnet)" stroke-width="1.5" opacity="0.3"/>
       </svg>
       <p class="gift-card-title" data-i18n="gift_envelope_title">Lluvia de sobres</p>
-      <p class="gift-card-body" data-i18n="gift_envelope_body">La tradición de regalarles a los novios en efectivo el día del evento.</p>
+      <p class="gift-card-body" data-i18n="gift_envelope_body">La tradició n de regalarles a los novios en efectivo el dí a del evento.</p>
     </div>
 
     <!-- Card 2 — Luna de miel -->
@@ -1182,11 +1320,45 @@
         <line x1="30" y1="66" x2="30" y2="78" stroke="var(--garnet)" stroke-width="1" opacity="0.4"/>
       </svg>
       <p class="gift-card-title" data-i18n="gift_honey_title">Luna de miel</p>
-      <p class="gift-card-body" data-i18n="gift_honey_body">O si quieres puedes contribuir a que nuestra luna de miel esté llena de kilómetros y experiencias inolvidables.</p>
+      <p class="gift-card-body" data-i18n="gift_honey_body">O si quieres puedes contribuir a que nuestra luna de miel esté llena de kiló metros y experiencias inolvidables.</p>
+      <button class="btn-transfer" onclick="openTransferModal()" data-i18n="gift_transfer_btn">Contribuir</button>
     </div>
   </div>
 </section>
 
+
+<!-- Transfer Modal -->
+<div class="transfer-modal-overlay" id="transferModal" onclick="closeTransferModal(event)">
+  <div class="transfer-modal">
+    <button class="transfer-close" onclick="closeTransferModal()">&times;</button>
+    <h3 class="transfer-title" data-i18n="gift_transfer_title">¿ Dó nde enviarlo?</h3>
+    <div class="transfer-tabs">
+      <button class="transfer-tab active" id="tabMX" onclick="switchTab('MX')" data-i18n="gift_tab_mx">🇲🇽 Mé xico</button>
+      <button class="transfer-tab" id="tabEU" onclick="switchTab('EU')" data-i18n="gift_tab_eu">🇪🇺 Europa</button>
+    </div>
+
+    <!-- MX Panel -->
+    <div class="transfer-panel" id="panelMX">
+      <p class="transfer-label" data-i18n="gift_mx_label">Transferencia SPEI</p>
+      <div class="transfer-detail-row">
+        <span class="transfer-detail" id="mxClabe">0000 0000 0000 0000 0000</span>
+        <button class="btn-copy" onclick="copyText('mxClabe')" data-i18n="gift_copy">Copiar</button>
+      </div>
+      <p class="transfer-bank" data-i18n="gift_mx_bank">Banco: BBVA México</p>
+      <p class="transfer-name" data-i18n="gift_mx_name">Katia y Andrés</p>
+    </div>
+
+    <!-- EU Panel -->
+    <div class="transfer-panel hidden" id="panelEU">
+      <p class="transfer-label" data-i18n="gift_eu_label">Revolut</p>
+      <div class="transfer-detail-row">
+        <span class="transfer-detail" id="euRevolut">@username</span>
+        <button class="btn-copy" onclick="copyText('euRevolut')" data-i18n="gift_copy">Copiar</button>
+      </div>
+      <a class="btn-revolut" href="https://revolut.me/username" target="_blank" rel="noopener" id="revolutLink" data-i18n="gift_revolut_btn">Abrir Revolut →</a>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════
      10. FOOTER
@@ -1251,11 +1423,21 @@
       rsvp_deadline: 'Por favor confirma antes del 01/ 01/ 2027',
       rsvp_thanks: '¡Gracias! Nos vemos el 20 de marzo 🎉',
       gift_title: 'Mesa de regalos',
-      gift_lead: 'Nos encantaría llevarnos algún detalle de tu parte… pero ya venimos con la maleta llena.',
+      gift_lead: 'Nos encantarí a llevarnos algú n detalle de tu parte… pero ya venimos con la maleta llena.',
       gift_envelope_title: 'Lluvia de sobres',
-      gift_envelope_body: 'La tradición de regalarles a los novios en efectivo el día del evento.',
+      gift_envelope_body: 'La tradició n de regalarles a los novios en efectivo el dí a del evento.',
       gift_honey_title: 'Luna de miel',
-      gift_honey_body: 'O si quieres puedes contribuir a que nuestra luna de miel esté llena de kilómetros y experiencias inolvidables.',
+      gift_honey_body: 'O si quieres puedes contribuir a que nuestra luna de miel esté llena de kiló metros y experiencias inolvidables.',
+      gift_transfer_btn: 'Contribuir',
+      gift_transfer_title: '¿ Dó nde enviarlo?',
+      gift_tab_mx: '🇲🇽 Mé xico',
+      gift_tab_eu: '🇪🇺 Europa',
+      gift_mx_label: 'Transferencia SPEI',
+      gift_mx_bank: 'Banco: BBVA Mé xico',
+      gift_mx_name: 'Katia y André s',
+      gift_copy: 'Copiar',
+      gift_eu_label: 'Revolut',
+      gift_revolut_btn: 'Abrir Revolut →',
       footer_made: 'Hecho con amor · Morelia, México',
     },
     en: {
@@ -1302,11 +1484,21 @@
       rsvp_deadline: 'Please confirm before 01/ 01/ 2027',
       rsvp_thanks: 'Thank you! See you on March 20th 🎉',
       gift_title: 'Gift registry',
-      gift_lead: "We'd love a little something from you… but our suitcase is already full.",
+      gift_lead: "We' d love a little something from you… but our suitcase is already full.",
       gift_envelope_title: 'Cash gift',
       gift_envelope_body: 'The tradition of gifting the newlyweds cash on their wedding day.',
       gift_honey_title: 'Honeymoon fund',
       gift_honey_body: 'Or contribute to filling our honeymoon with miles and unforgettable experiences.',
+      gift_transfer_btn: 'Contribute',
+      gift_transfer_title: 'Where to send it?',
+      gift_tab_mx: '🇲🇽 Mexico',
+      gift_tab_eu: '🇪🇺 Europe',
+      gift_mx_label: 'SPEI Transfer',
+      gift_mx_bank: 'Bank: BBVA Mexico',
+      gift_mx_name: 'Katia & Andre s',
+      gift_copy: 'Copy',
+      gift_eu_label: 'Revolut',
+      gift_revolut_btn: 'Open Revolut →',
       footer_made: 'Made with love · Morelia, México',
     }
   };
@@ -1481,6 +1673,33 @@
     });
 
   }); // end load
+
+    /* ── Transfer Modal ── */
+    function openTransferModal() {
+      document.getElementById('transferModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeTransferModal(e) {
+      if (e && e.target !== document.getElementById('transferModal')) return;
+      document.getElementById('transferModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function switchTab(tab) {
+      document.getElementById('panelMX').classList.toggle('hidden', tab !== 'MX');
+      document.getElementById('panelEU').classList.toggle('hidden', tab !== 'EU');
+      document.getElementById('tabMX').classList.toggle('active', tab === 'MX');
+      document.getElementById('tabEU').classList.toggle('active', tab === 'EU');
+    }
+    function copyText(id) {
+      const text = document.getElementById(id).textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector(`[onclick="copyText('${id}')"]`);
+        const orig = btn.textContent;
+        btn.textContent = '✓';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+      });
+    }
 </script>
 
 </body>
