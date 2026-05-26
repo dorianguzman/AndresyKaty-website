@@ -265,24 +265,22 @@
       overflow: hidden;
     }
     .timeline-title {
-      font-family: var(--font-script);
-      font-size: clamp(44px, 8vw, 60px);
+      font-family: var(--font-display);
+      font-size: clamp(48px, 10vw, 76px);
       color: var(--garnet);
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 56px;
     }
     .timeline-wrap {
       position: relative;
-      max-width: 720px;
+      max-width: 600px;
       margin: 0 auto;
     }
-    .timeline-svg-path {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0;
-      pointer-events: none;
-      z-index: 0;
+    .tl-connector {
+      display: block;
+      width: 90px;
+      height: 90px;
+      margin: -8px auto;
       overflow: visible;
     }
     .timeline-events {
@@ -290,57 +288,54 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
     .timeline-event {
       display: flex;
       align-items: center;
-      gap: 24px;
-      padding: 28px 0;
+      gap: 28px;
+      padding: 40px 8px;
     }
-    .timeline-event.left { flex-direction: row; }
+    .timeline-event.left  { flex-direction: row; }
     .timeline-event.right { flex-direction: row-reverse; }
-    .event-content {
-      flex: 1;
-      max-width: calc(50% - 60px);
+    .event-illo {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .timeline-event.left .event-content { text-align: right; }
-    .timeline-event.right .event-content { text-align: left; }
+    .event-text { flex: 1; }
+    .timeline-event.left  .event-text { text-align: left; }
+    .timeline-event.right .event-text { text-align: right; }
+    .event-label {
+      font-family: var(--font-script);
+      font-size: clamp(34px, 7vw, 52px);
+      color: var(--garnet);
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
     .event-time {
       font-family: var(--font-body);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       color: var(--rose);
       text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .event-label {
-      font-family: var(--font-script);
-      font-size: 26px;
-      color: var(--garnet);
       margin-bottom: 4px;
     }
     .event-place {
       font-family: var(--font-body);
       font-size: 12px;
       color: #8a6070;
-      line-height: 1.4;
+      line-height: 1.5;
+      margin-top: 4px;
     }
-    .event-icon {
-      width: 72px;
-      height: 72px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      border-radius: 50%;
-      box-shadow: 0 4px 20px rgba(122,43,58,0.12);
-      z-index: 2;
+    .event-place-link {
+      text-decoration: none;
+      color: #8a6070;
+      border-bottom: 1px solid rgba(138,96,112,0.3);
+      transition: border-color 0.2s;
     }
-    .event-spacer { flex: 1; max-width: calc(50% - 60px); }
-
+    .event-place-link:hover { border-color: var(--rose); color: var(--garnet); }
     /* ── ACCOMMODATION ── */
     .accommodation {
       background: var(--garnet);
@@ -748,12 +743,6 @@
       .nav { padding: 12px 20px; }
       .hotels-grid { grid-template-columns: 1fr; }
       .gifts-grid { grid-template-columns: 1fr; }
-      .timeline-event.left,
-      .timeline-event.right { flex-direction: column; align-items: center; }
-      .event-content, .event-spacer { max-width: 100%; text-align: center !important; }
-      .event-spacer { display: none; }
-      .timeline-svg-path { display: none; }
-      .timeline-event { padding: 16px 0; }
     }
 
     /* ── Utility ── */
@@ -812,139 +801,113 @@
 
   <div class="timeline-wrap">
 
-    <!-- Curvy SVG path -->
-    <svg class="timeline-svg-path" width="4" height="660" viewBox="0 0 4 660" fill="none" xmlns="http://www.w3.org/2000/svg" style="left:50%; top:60px; height:600px; width:160px; transform:translateX(-50%);">
-      <path class="timeline-path"
-        d="M80 0 C 20 60, 140 120, 80 180 C 20 240, 140 300, 80 360 C 20 420, 140 480, 80 540 C 20 580, 80 600, 80 600"
-        stroke="#D4899A" stroke-width="2.5" fill="none" stroke-linecap="round"
-        stroke-dasharray="800" stroke-dashoffset="800"
-        opacity="0.6"
-      />
-    </svg>
-
     <div class="timeline-events">
 
       <!-- Event 1 — Ceremonia (left) -->
       <div class="timeline-event left" id="te1">
-        <div class="event-content">
-          <p class="event-time" data-i18n="ceremony_time">16:00</p>
-          <p class="event-label" data-i18n="ceremony_label">Ceremonia</p>
-          <p class="event-place" data-i18n="ceremony_place">Santuario Ntra. Sra. de Guadalupe</p>
-        </div>
-        <div class="event-icon">
-          <!-- SVG Church -->
-          <svg width="44" height="52" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Body -->
+        <div class="event-illo">
+          <svg width="100" height="118" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="20" y="60" width="60" height="55" rx="3" fill="#FCF0F2" stroke="#7A2B3A" stroke-width="3"/>
-            <!-- Roof -->
             <polygon points="15,62 50,30 85,62" fill="#D4899A"/>
-            <!-- Cross -->
             <rect x="46" y="8" width="8" height="28" rx="2" fill="#7A2B3A"/>
             <rect x="36" y="16" width="28" height="8" rx="2" fill="#7A2B3A"/>
-            <!-- Door arch -->
             <path d="M38 115 L38 82 Q38 70 50 70 Q62 70 62 82 L62 115 Z" fill="#7A2B3A" opacity="0.8"/>
-            <!-- Windows -->
             <rect x="24" y="75" width="16" height="20" rx="8" fill="#C9A84C" opacity="0.7"/>
             <rect x="60" y="75" width="16" height="20" rx="8" fill="#C9A84C" opacity="0.7"/>
           </svg>
         </div>
-        <div class="event-spacer"></div>
+        <div class="event-text">
+          <p class="event-label" data-i18n="ceremony_label">Ceremonia</p>
+          <p class="event-time" data-i18n="ceremony_time">16:00</p>
+          <a href="https://maps.app.goo.gl/ztnASWmWhxs6tocS8" target="_blank" class="event-place event-place-link" data-i18n="ceremony_place">Santuario Ntra. Sra. de Guadalupe →</a>
+        </div>
       </div>
+
+      <!-- Connector 1→2: loop then curves right -->
+      <svg class="tl-connector" id="tlc1" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="tl-conn-path" d="M 38 4 C 58 10, 70 24, 54 36 C 38 48, 24 42, 34 56 C 44 70, 62 72, 60 85" stroke="#D4899A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="130" stroke-dashoffset="130" opacity="0.85"/>
+      </svg>
 
       <!-- Event 2 — Bienvenida (right) -->
       <div class="timeline-event right" id="te2">
-        <div class="event-spacer"></div>
-        <div class="event-icon">
-          <!-- SVG Wedding Car -->
-          <svg width="52" height="38" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Body lower -->
+        <div class="event-illo">
+          <svg width="160" height="90" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="10" y="55" width="155" height="38" rx="10" fill="#D4899A"/>
-            <!-- Body upper / cabin -->
             <path d="M40 55 Q50 25, 80 20 L135 20 Q158 22, 165 55 Z" fill="#FCF0F2"/>
             <path d="M40 55 Q50 25, 80 20 L135 20 Q158 22, 165 55" stroke="#D4899A" stroke-width="2" fill="none"/>
-            <!-- Windshield -->
             <path d="M75 52 Q78 32, 90 28 L130 28 Q148 30, 152 52 Z" fill="#C9A84C" opacity="0.4"/>
-            <!-- Wheels -->
             <circle cx="50" cy="93" r="18" fill="#7A2B3A"/>
             <circle cx="50" cy="93" r="10" fill="#FCF0F2"/>
             <circle cx="50" cy="93" r="4" fill="#7A2B3A"/>
             <circle cx="130" cy="93" r="18" fill="#7A2B3A"/>
             <circle cx="130" cy="93" r="10" fill="#FCF0F2"/>
             <circle cx="130" cy="93" r="4" fill="#7A2B3A"/>
-            <!-- K&A license plate -->
             <rect x="68" y="62" width="44" height="18" rx="3" fill="#fff" stroke="#7A2B3A" stroke-width="1.5"/>
             <text x="90" y="75" font-family="Nunito, sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#7A2B3A">K&amp;A</text>
-            <!-- Floral on roof -->
             <circle cx="100" cy="20" r="5" fill="#E8956D" opacity="0.8"/>
             <circle cx="92" cy="17" r="3.5" fill="#D4899A"/>
             <circle cx="108" cy="17" r="3.5" fill="#D4899A"/>
             <circle cx="100" cy="12" r="3" fill="#D4899A"/>
-            <!-- Cans on string -->
             <line x1="165" y1="72" x2="185" y2="76" stroke="#7A2B3A" stroke-width="1.5"/>
             <line x1="165" y1="80" x2="185" y2="85" stroke="#7A2B3A" stroke-width="1.5"/>
             <rect x="183" y="71" width="9" height="11" rx="2" fill="#C9A84C" stroke="#7A2B3A" stroke-width="1"/>
             <rect x="183" y="83" width="9" height="11" rx="2" fill="#C9A84C" stroke="#7A2B3A" stroke-width="1"/>
           </svg>
         </div>
-        <div class="event-content">
-          <p class="event-time" data-i18n="welcome_time">16:30</p>
+        <div class="event-text">
           <p class="event-label" data-i18n="welcome_label">Bienvenida</p>
+          <p class="event-time" data-i18n="welcome_time">16:30</p>
         </div>
       </div>
+
+      <!-- Connector 2→3: S-curve left -->
+      <svg class="tl-connector" id="tlc2" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="tl-conn-path" d="M 60 4 C 70 18, 56 32, 46 46 C 36 60, 22 70, 30 85" stroke="#D4899A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="120" stroke-dashoffset="120" opacity="0.85"/>
+      </svg>
 
       <!-- Event 3 — Cocktail (left) -->
       <div class="timeline-event left" id="te3">
-        <div class="event-content">
-          <p class="event-time" data-i18n="cocktail_time">18:00</p>
-          <p class="event-label" data-i18n="cocktail_label">Cocktail</p>
-        </div>
-        <div class="event-icon">
-          <!-- SVG Wine Glass -->
-          <svg width="36" height="52" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Glass bowl -->
+        <div class="event-illo">
+          <svg width="80" height="115" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 10 Q10 50 40 65 Q70 50 65 10 Z" fill="rgba(122,43,58,0.12)" stroke="#7A2B3A" stroke-width="2.5"/>
-            <!-- Wine fill -->
             <path d="M18 38 Q16 55 40 65 Q64 55 62 38 Z" fill="#7A2B3A" opacity="0.75"/>
-            <!-- Bubbles -->
             <circle cx="35" cy="52" r="2.5" fill="rgba(255,255,255,0.6)"/>
             <circle cx="44" cy="46" r="1.8" fill="rgba(255,255,255,0.5)"/>
             <circle cx="30" cy="45" r="1.5" fill="rgba(255,255,255,0.5)"/>
-            <!-- Stem -->
             <line x1="40" y1="65" x2="40" y2="100" stroke="#7A2B3A" stroke-width="2.5"/>
-            <!-- Base -->
             <ellipse cx="40" cy="103" rx="22" ry="6" fill="#D4899A" opacity="0.5"/>
             <line x1="18" y1="103" x2="62" y2="103" stroke="#7A2B3A" stroke-width="2.5"/>
-            <!-- Leaf -->
             <path d="M62 32 Q72 22 70 12 Q60 18 62 32 Z" fill="#7a8c45" opacity="0.6"/>
           </svg>
         </div>
-        <div class="event-spacer"></div>
+        <div class="event-text">
+          <p class="event-label" data-i18n="cocktail_label">Cocktail</p>
+          <p class="event-time" data-i18n="cocktail_time">18:00</p>
+        </div>
       </div>
+
+      <!-- Connector 3→4: gentle curve right -->
+      <svg class="tl-connector" id="tlc3" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="tl-conn-path" d="M 30 4 C 24 22, 40 38, 48 54 C 56 70, 64 76, 62 88" stroke="#D4899A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="110" stroke-dashoffset="110" opacity="0.85"/>
+      </svg>
 
       <!-- Event 4 — Celebración (right) -->
       <div class="timeline-event right" id="te4">
-        <div class="event-spacer"></div>
-        <div class="event-icon">
-          <!-- SVG Party Stars -->
-          <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Big star -->
+        <div class="event-illo">
+          <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M50 10 L56 36 L82 36 L62 52 L70 78 L50 62 L30 78 L38 52 L18 36 L44 36 Z" fill="#D4899A" opacity="0.9"/>
-            <!-- Small star top right -->
             <path d="M78 5 L80 12 L87 12 L81.5 16.5 L83.5 23.5 L78 19 L72.5 23.5 L74.5 16.5 L69 12 L76 12 Z" fill="#E8956D"/>
-            <!-- Small star bottom left -->
             <path d="M16 62 L17.5 67 L22.5 67 L18.5 70 L20 75 L16 72 L12 75 L13.5 70 L9.5 67 L14.5 67 Z" fill="#E8956D" opacity="0.8"/>
-            <!-- Sparkles -->
             <line x1="88" y1="42" x2="88" y2="52" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
             <line x1="83" y1="47" x2="93" y2="47" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
             <line x1="8" y1="30" x2="8" y2="38" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
             <line x1="4" y1="34" x2="12" y2="34" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Music note -->
             <text x="60" y="96" font-size="16" fill="#7A2B3A" opacity="0.7">♪</text>
           </svg>
         </div>
-        <div class="event-content">
-          <p class="event-time" data-i18n="party_time">18:00 – 02:00</p>
+        <div class="event-text">
           <p class="event-label" data-i18n="party_label">Celebración</p>
+          <p class="event-time" data-i18n="party_time">18:00 – 02:00</p>
         </div>
       </div>
 
@@ -1491,16 +1454,18 @@
       }
     });
 
-    // Timeline path draw
-    gsap.to('.timeline-path', {
-      strokeDashoffset: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.timeline-section',
-        start: 'top 80%',
-        end: 'bottom 20%',
-        scrub: 1
-      }
+    // Timeline connector draws
+    ['#tlc1', '#tlc2', '#tlc3'].forEach(function(sel) {
+      gsap.to(sel + ' .tl-conn-path', {
+        strokeDashoffset: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: sel,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      });
     });
 
     // Timeline events stagger from sides
