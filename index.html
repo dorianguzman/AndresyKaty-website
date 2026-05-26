@@ -182,11 +182,17 @@
     }
 
     /* ── LOCATION ── */
-    .location { overflow: hidden; }
-    .location-img-wrap {
-      height: 55vh;
-      overflow: hidden;
+    .location {
       position: relative;
+      overflow: hidden;
+    }
+    .location-img-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
     }
     .location-img {
       width: 100%;
@@ -197,9 +203,14 @@
       will-change: transform;
     }
     .location-info {
-      background: var(--garnet);
+      position: relative;
+      z-index: 1;
+      background: rgba(122, 43, 58, 0.82);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       padding: 56px 32px 64px;
       text-align: center;
+      margin-top: 50vh;
     }
     .location-label {
       font-family: var(--font-body);
@@ -782,7 +793,7 @@
 ═══════════════════════════════════════ -->
 <section class="location" id="location">
   <div class="location-img-wrap">
-    <img class="location-img" src="./assets/jardin.jpg" alt="Jardín Santa Sofía, Morelia" />
+    <img class="location-img" src="./assets/jardin-cropped.png" alt="Jardín Santa Sofía, Morelia" />
   </div>
   <div class="location-info">
     <p class="location-label reveal" data-i18n="location_label">Ubicación</p>
