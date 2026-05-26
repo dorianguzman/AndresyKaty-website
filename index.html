@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katia y Andrés · 20.03.2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ── Reset & Root ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --garnet:      #7A2B3A;
+      --garnet-dark: #5C1F2C;
+      --blush:       #FCF0F2;
+      --cream:       #FDF6F0;
+      --rose:        #D4899A;
+      --gold:        #C9A84C;
+      --orange-soft: #E8956D;
+      --text-dark:   #2D1A1F;
+      --font-script: 'Caveat', cursive;
+      --font-body:   'Nunito', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+    }
+    .nav.solid {
+      background: var(--blush);
+      box-shadow: 0 2px 20px rgba(122,43,58,0.08);
+    }
+    .nav-date {
+      font-family: var(--font-script);
+      font-size: 16px;
+      color: var(--cream);
+      letter-spacing: 1px;
+      transition: color 0.4s;
+    }
+    .nav.solid .nav-date { color: var(--garnet); }
+    .lang-toggle {
+      display: flex;
+      gap: 4px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 3px;
+      transition: background 0.4s;
+    }
+    .nav.solid .lang-toggle { background: rgba(122,43,58,0.08); }
+    .lang-btn {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 5px 12px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      transition: all 0.25s;
+    }
+    .nav.solid .lang-btn { color: var(--garnet); }
+    .lang-btn.active {
+      background: var(--rose);
+      color: #fff;
+    }
+    .nav.solid .lang-btn.active {
+      background: var(--rose);
+      color: #fff;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('./assets/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(45,26,31,0.1) 0%,
+        rgba(45,26,31,0.15) 40%,
+        rgba(45,26,31,0.6) 80%,
+        rgba(45,26,31,0.75) 100%
+      );
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .hero-announce {
+      font-family: var(--font-script);
+      font-size: 22px;
+      color: var(--cream);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      opacity: 0;
+    }
+    .hero-names {
+      font-family: var(--font-script);
+      font-size: clamp(52px, 10vw, 80px);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.05;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 20px rgba(45,26,31,0.3);
+      opacity: 0;
+    }
+    .hero-date {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--rose);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0;
+    }
+
+    /* ── LOCATION ── */
+    .location { overflow: hidden; }
+    .location-img-wrap {
+      height: 55vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .location-img {
+      width: 100%;
+      height: 130%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      will-change: transform;
+    }
+    .location-info {
+      background: var(--garnet);
+      padding: 56px 32px 64px;
+      text-align: center;
+    }
+    .location-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 14px;
+    }
+    .location-venue {
+      font-family: var(--font-script);
+      font-size: clamp(38px, 8vw, 56px);
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    .location-city {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--rose);
+      letter-spacing: 1px;
+      margin-bottom: 32px;
+    }
+    .btn-pill {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-outline-light {
+      border: 2px solid rgba(255,255,255,0.5);
+      color: #fff;
+      background: transparent;
+    }
+    .btn-outline-light:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: #fff;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline-section {
+      background: var(--blush);
+      padding: 80px 24px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .timeline-title {
+      font-family: var(--font-script);
+      font-size: clamp(44px, 8vw, 60px);
+      color: var(--garnet);
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .timeline-wrap {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .timeline-svg-path {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: visible;
+    }
+    .timeline-events {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .timeline-event {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 0;
+    }
+    .timeline-event.left { flex-direction: row; }
+    .timeline-event.right { flex-direction: row-reverse; }
+    .event-content {
+      flex: 1;
+      max-width: calc(50% - 60px);
+    }
+    .timeline-event.left .event-content { text-align: right; }
+    .timeline-event.right .event-content { text-align: left; }
+    .event-time {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--rose);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .event-label {
+      font-family: var(--font-script);
+      font-size: 26px;
+      color: var(--garnet);
+      margin-bottom: 4px;
+    }
+    .event-place {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #8a6070;
+      line-height: 1.4;
+    }
+    .event-icon {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 4px 20px rgba(122,43,58,0.12);
+      z-index: 2;
+    }
+    .event-spacer { flex: 1; max-width: calc(50% - 60px); }
+
+    /* ── ACCOMMODATION ── */
+    .accommodation {
+      background: var(--garnet);
+      padding: 80px 24px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .accommodation-deco {
+      position: absolute;
+      top: 24px; right: 24px;
+      opacity: 0.25;
+    }
+    .accommodation-title {
+      font-family: var(--font-script);
+      font-size: clamp(36px, 7vw, 52px);
+      color: #fff;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .hotels-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hotel-card {
+      background: var(--cream);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hotel-name {
+      font-family: var(--font-script);
+      font-size: 22px;
+      color: var(--garnet);
+      line-height: 1.2;
+    }
+    .hotel-address {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #8a6070;
+      flex: 1;
+      line-height: 1.5;
+    }
+    .btn-outline-garnet {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 9px 20px;
+      border-radius: 50px;
+      border: 2px solid var(--garnet);
+      color: var(--garnet);
+      background: transparent;
+      text-decoration: none;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      align-self: flex-start;
+    }
+    .btn-outline-garnet:hover {
+      background: var(--garnet);
+      color: #fff;
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      background: var(--cream);
+      padding: 80px 24px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .faq-deco-tr {
+      position: absolute;
+      top: 20px; right: 20px;
+      transform: rotate(12deg);
+      opacity: 0.55;
+    }
+    .faq-deco-bl {
+      position: absolute;
+      bottom: 20px; left: 20px;
+      transform: rotate(-8deg);
+      opacity: 0.45;
+    }
+    .faq-title {
+      font-family: var(--font-script);
+      font-size: clamp(36px, 7vw, 52px);
+      color: var(--garnet);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .faq-list {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .faq-item {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid rgba(212,137,154,0.2);
+      overflow: hidden;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      cursor: pointer;
+      gap: 16px;
+      user-select: none;
+    }
+    .faq-question span {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark);
+      flex: 1;
+    }
+    .faq-indicator {
+      font-size: 22px;
+      color: var(--rose);
+      font-weight: 300;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    .faq-answer-wrap {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .faq-answer {
+      padding: 0 24px 20px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: #8a6070;
+      line-height: 1.6;
+    }
+    .faq-item.open .faq-answer-wrap { max-height: 200px; }
+    .faq-item.open .faq-indicator { transform: rotate(45deg); }
+
+    /* ── PHOTOS ── */
+    .photos-section {
+      background: linear-gradient(135deg, var(--blush) 0%, #F5E0E5 100%);
+      padding: 80px 24px 90px;
+      text-align: center;
+    }
+    .photos-title {
+      font-family: var(--font-script);
+      font-size: clamp(36px, 7vw, 52px);
+      color: var(--garnet);
+      margin-bottom: 16px;
+    }
+    .photos-body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: #8a6070;
+      max-width: 400px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .photos-illustration {
+      margin: 0 auto 36px;
+      display: block;
+    }
+    .btn-garnet {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 14px 36px;
+      border-radius: 50px;
+      background: var(--garnet);
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-garnet:hover {
+      background: var(--garnet-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── RSVP ── */
+    .rsvp-section {
+      background: #fff;
+      padding: 80px 24px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .rsvp-deco {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    .rsvp-title {
+      font-family: var(--font-script);
+      font-size: clamp(40px, 8vw, 60px);
+      color: var(--garnet);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .rsvp-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-field label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #8a6070;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .form-field input,
+    .form-field textarea {
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 13px 20px;
+      border: 2px solid rgba(212,137,154,0.25);
+      border-radius: 50px;
+      background: var(--cream);
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-field textarea {
+      border-radius: 20px;
+      resize: vertical;
+      min-height: 90px;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--rose);
+    }
+    .plus-one-toggle {
+      display: flex;
+      gap: 0;
+      background: var(--cream);
+      border-radius: 50px;
+      border: 2px solid rgba(212,137,154,0.25);
+      overflow: hidden;
+      width: fit-content;
+    }
+    .toggle-btn {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px 24px;
+      border: none;
+      background: transparent;
+      color: #8a6070;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .toggle-btn.active {
+      background: var(--rose);
+      color: #fff;
+      border-radius: 50px;
+    }
+    .guest-field { display: none; }
+    .guest-field.visible { display: flex; }
+    .rsvp-submit {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 16px 40px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--rose) 0%, var(--garnet) 100%);
+      color: #fff;
+      margin-top: 8px;
+      transition: opacity 0.25s, transform 0.2s;
+      align-self: center;
+    }
+    .rsvp-submit:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    .rsvp-deadline {
+      text-align: center;
+      font-family: var(--font-script);
+      font-size: 17px;
+      color: #aaa;
+      margin-top: 8px;
+    }
+    .rsvp-thanks {
+      display: none;
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .rsvp-thanks.visible { display: block; }
+    .rsvp-thanks p {
+      font-family: var(--font-script);
+      font-size: 36px;
+      color: var(--garnet);
+      margin-top: 16px;
+    }
+    .thanks-heart {
+      display: block;
+      margin: 0 auto;
+      animation: heartbeat 1.2s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* ── GIFT ── */
+    .gift-section {
+      background: var(--garnet);
+      padding: 80px 24px 90px;
+      position: relative;
+    }
+    .gift-title {
+      font-family: var(--font-script);
+      font-size: clamp(36px, 7vw, 52px);
+      color: #fff;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .gift-lead {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      max-width: 460px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+    .gifts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .gift-card {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .gift-card-title {
+      font-family: var(--font-script);
+      font-size: 24px;
+      color: var(--garnet);
+    }
+    .gift-card-body {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #8a6070;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--garnet-dark);
+      padding: 40px 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-names {
+      font-family: var(--font-script);
+      font-size: 26px;
+      color: var(--rose);
+    }
+    .footer-made {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: rgba(212,137,154,0.6);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .nav { padding: 12px 20px; }
+      .hotels-grid { grid-template-columns: 1fr; }
+      .gifts-grid { grid-template-columns: 1fr; }
+      .timeline-event.left,
+      .timeline-event.right { flex-direction: column; align-items: center; }
+      .event-content, .event-spacer { max-width: 100%; text-align: center !important; }
+      .event-spacer { display: none; }
+      .timeline-svg-path { display: none; }
+      .timeline-event { padding: 16px 0; }
+    }
+
+    /* ── Utility ── */
+    .reveal { opacity: 1; } /* default visible if GSAP not loaded */
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     1. NAV
+═══════════════════════════════════════ -->
+<nav class="nav" id="mainNav">
+  <span class="nav-date" data-i18n="nav_date">20.03.2027</span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════
+     2. HERO
+═══════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-announce" data-i18n="hero_announce">¡Nos casamos!</p>
+    <h1 class="hero-names">Katia y Andrés</h1>
+    <p class="hero-date" data-i18n="hero_date">20 · marzo · 2027</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     3. LOCATION
+═══════════════════════════════════════ -->
+<section class="location" id="location">
+  <div class="location-img-wrap">
+    <img class="location-img" src="./assets/image3.jpeg" alt="Jardín Santa Sofía, Morelia" />
+  </div>
+  <div class="location-info">
+    <p class="location-label reveal" data-i18n="location_label">Ubicación</p>
+    <h2 class="location-venue reveal" data-i18n="location_venue">Jardín Santa Sofía</h2>
+    <p class="location-city reveal" data-i18n="location_city">Morelia, México</p>
+    <a href="https://maps.google.com" target="_blank" class="btn-pill btn-outline-light reveal" data-i18n="location_btn">Cómo llegar →</a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     4. TIMELINE
+═══════════════════════════════════════ -->
+<section class="timeline-section" id="timeline">
+  <h2 class="timeline-title" data-i18n="timeline_title">timeline</h2>
+
+  <div class="timeline-wrap">
+
+    <!-- Curvy SVG path -->
+    <svg class="timeline-svg-path" width="4" height="660" viewBox="0 0 4 660" fill="none" xmlns="http://www.w3.org/2000/svg" style="left:50%; top:60px; height:600px; width:160px; transform:translateX(-50%);">
+      <path class="timeline-path"
+        d="M80 0 C 20 60, 140 120, 80 180 C 20 240, 140 300, 80 360 C 20 420, 140 480, 80 540 C 20 580, 80 600, 80 600"
+        stroke="#D4899A" stroke-width="2.5" fill="none" stroke-linecap="round"
+        stroke-dasharray="800" stroke-dashoffset="800"
+        opacity="0.6"
+      />
+    </svg>
+
+    <div class="timeline-events">
+
+      <!-- Event 1 — Ceremonia (left) -->
+      <div class="timeline-event left" id="te1">
+        <div class="event-content">
+          <p class="event-time" data-i18n="ceremony_time">16:00</p>
+          <p class="event-label" data-i18n="ceremony_label">Ceremonia</p>
+          <p class="event-place" data-i18n="ceremony_place">Santuario Ntra. Sra. de Guadalupe</p>
+        </div>
+        <div class="event-icon">
+          <!-- SVG Church -->
+          <svg width="44" height="52" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body -->
+            <rect x="20" y="60" width="60" height="55" rx="3" fill="#FCF0F2" stroke="#7A2B3A" stroke-width="3"/>
+            <!-- Roof -->
+            <polygon points="15,62 50,30 85,62" fill="#D4899A"/>
+            <!-- Cross -->
+            <rect x="46" y="8" width="8" height="28" rx="2" fill="#7A2B3A"/>
+            <rect x="36" y="16" width="28" height="8" rx="2" fill="#7A2B3A"/>
+            <!-- Door arch -->
+            <path d="M38 115 L38 82 Q38 70 50 70 Q62 70 62 82 L62 115 Z" fill="#7A2B3A" opacity="0.8"/>
+            <!-- Windows -->
+            <rect x="24" y="75" width="16" height="20" rx="8" fill="#C9A84C" opacity="0.7"/>
+            <rect x="60" y="75" width="16" height="20" rx="8" fill="#C9A84C" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="event-spacer"></div>
+      </div>
+
+      <!-- Event 2 — Bienvenida (right) -->
+      <div class="timeline-event right" id="te2">
+        <div class="event-spacer"></div>
+        <div class="event-icon">
+          <!-- SVG Wedding Car -->
+          <svg width="52" height="38" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body lower -->
+            <rect x="10" y="55" width="155" height="38" rx="10" fill="#D4899A"/>
+            <!-- Body upper / cabin -->
+            <path d="M40 55 Q50 25, 80 20 L135 20 Q158 22, 165 55 Z" fill="#FCF0F2"/>
+            <path d="M40 55 Q50 25, 80 20 L135 20 Q158 22, 165 55" stroke="#D4899A" stroke-width="2" fill="none"/>
+            <!-- Windshield -->
+            <path d="M75 52 Q78 32, 90 28 L130 28 Q148 30, 152 52 Z" fill="#C9A84C" opacity="0.4"/>
+            <!-- Wheels -->
+            <circle cx="50" cy="93" r="18" fill="#7A2B3A"/>
+            <circle cx="50" cy="93" r="10" fill="#FCF0F2"/>
+            <circle cx="50" cy="93" r="4" fill="#7A2B3A"/>
+            <circle cx="130" cy="93" r="18" fill="#7A2B3A"/>
+            <circle cx="130" cy="93" r="10" fill="#FCF0F2"/>
+            <circle cx="130" cy="93" r="4" fill="#7A2B3A"/>
+            <!-- K&A license plate -->
+            <rect x="68" y="62" width="44" height="18" rx="3" fill="#fff" stroke="#7A2B3A" stroke-width="1.5"/>
+            <text x="90" y="75" font-family="Nunito, sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#7A2B3A">K&amp;A</text>
+            <!-- Floral on roof -->
+            <circle cx="100" cy="20" r="5" fill="#E8956D" opacity="0.8"/>
+            <circle cx="92" cy="17" r="3.5" fill="#D4899A"/>
+            <circle cx="108" cy="17" r="3.5" fill="#D4899A"/>
+            <circle cx="100" cy="12" r="3" fill="#D4899A"/>
+            <!-- Cans on string -->
+            <line x1="165" y1="72" x2="185" y2="76" stroke="#7A2B3A" stroke-width="1.5"/>
+            <line x1="165" y1="80" x2="185" y2="85" stroke="#7A2B3A" stroke-width="1.5"/>
+            <rect x="183" y="71" width="9" height="11" rx="2" fill="#C9A84C" stroke="#7A2B3A" stroke-width="1"/>
+            <rect x="183" y="83" width="9" height="11" rx="2" fill="#C9A84C" stroke="#7A2B3A" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="event-content">
+          <p class="event-time" data-i18n="welcome_time">16:30</p>
+          <p class="event-label" data-i18n="welcome_label">Bienvenida</p>
+        </div>
+      </div>
+
+      <!-- Event 3 — Cocktail (left) -->
+      <div class="timeline-event left" id="te3">
+        <div class="event-content">
+          <p class="event-time" data-i18n="cocktail_time">18:00</p>
+          <p class="event-label" data-i18n="cocktail_label">Cocktail</p>
+        </div>
+        <div class="event-icon">
+          <!-- SVG Wine Glass -->
+          <svg width="36" height="52" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Glass bowl -->
+            <path d="M15 10 Q10 50 40 65 Q70 50 65 10 Z" fill="rgba(122,43,58,0.12)" stroke="#7A2B3A" stroke-width="2.5"/>
+            <!-- Wine fill -->
+            <path d="M18 38 Q16 55 40 65 Q64 55 62 38 Z" fill="#7A2B3A" opacity="0.75"/>
+            <!-- Bubbles -->
+            <circle cx="35" cy="52" r="2.5" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="44" cy="46" r="1.8" fill="rgba(255,255,255,0.5)"/>
+            <circle cx="30" cy="45" r="1.5" fill="rgba(255,255,255,0.5)"/>
+            <!-- Stem -->
+            <line x1="40" y1="65" x2="40" y2="100" stroke="#7A2B3A" stroke-width="2.5"/>
+            <!-- Base -->
+            <ellipse cx="40" cy="103" rx="22" ry="6" fill="#D4899A" opacity="0.5"/>
+            <line x1="18" y1="103" x2="62" y2="103" stroke="#7A2B3A" stroke-width="2.5"/>
+            <!-- Leaf -->
+            <path d="M62 32 Q72 22 70 12 Q60 18 62 32 Z" fill="#7a8c45" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="event-spacer"></div>
+      </div>
+
+      <!-- Event 4 — Celebración (right) -->
+      <div class="timeline-event right" id="te4">
+        <div class="event-spacer"></div>
+        <div class="event-icon">
+          <!-- SVG Party Stars -->
+          <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Big star -->
+            <path d="M50 10 L56 36 L82 36 L62 52 L70 78 L50 62 L30 78 L38 52 L18 36 L44 36 Z" fill="#D4899A" opacity="0.9"/>
+            <!-- Small star top right -->
+            <path d="M78 5 L80 12 L87 12 L81.5 16.5 L83.5 23.5 L78 19 L72.5 23.5 L74.5 16.5 L69 12 L76 12 Z" fill="#E8956D"/>
+            <!-- Small star bottom left -->
+            <path d="M16 62 L17.5 67 L22.5 67 L18.5 70 L20 75 L16 72 L12 75 L13.5 70 L9.5 67 L14.5 67 Z" fill="#E8956D" opacity="0.8"/>
+            <!-- Sparkles -->
+            <line x1="88" y1="42" x2="88" y2="52" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
+            <line x1="83" y1="47" x2="93" y2="47" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
+            <line x1="8" y1="30" x2="8" y2="38" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="4" y1="34" x2="12" y2="34" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Music note -->
+            <text x="60" y="96" font-size="16" fill="#7A2B3A" opacity="0.7">♪</text>
+          </svg>
+        </div>
+        <div class="event-content">
+          <p class="event-time" data-i18n="party_time">18:00 – 02:00</p>
+          <p class="event-label" data-i18n="party_label">Celebración</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     5. ACCOMMODATION
+═══════════════════════════════════════ -->
+<section class="accommodation" id="accommodation">
+  <!-- Decorative azulejo tile -->
+  <div class="accommodation-deco">
+    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="78" height="78" rx="4" fill="#FDF6F0" stroke="#FCF0F2" stroke-width="2"/>
+      <rect x="5" y="5" width="70" height="70" rx="2" fill="none" stroke="#FCF0F2" stroke-width="1.5"/>
+      <!-- 4-petal flower center -->
+      <path d="M40 20 Q50 30 40 40 Q30 30 40 20 Z" fill="#FCF0F2" opacity="0.7"/>
+      <path d="M60 40 Q50 50 40 40 Q50 30 60 40 Z" fill="#FCF0F2" opacity="0.7"/>
+      <path d="M40 60 Q30 50 40 40 Q50 50 40 60 Z" fill="#FCF0F2" opacity="0.7"/>
+      <path d="M20 40 Q30 30 40 40 Q30 50 20 40 Z" fill="#FCF0F2" opacity="0.7"/>
+      <circle cx="40" cy="40" r="5" fill="#E8956D" opacity="0.6"/>
+      <!-- Corner decorations -->
+      <circle cx="14" cy="14" r="4" fill="#FCF0F2" opacity="0.5"/>
+      <circle cx="66" cy="14" r="4" fill="#FCF0F2" opacity="0.5"/>
+      <circle cx="14" cy="66" r="4" fill="#FCF0F2" opacity="0.5"/>
+      <circle cx="66" cy="66" r="4" fill="#FCF0F2" opacity="0.5"/>
+      <!-- Cross lines -->
+      <line x1="40" y1="5" x2="40" y2="18" stroke="#FCF0F2" stroke-width="1" opacity="0.4"/>
+      <line x1="40" y1="62" x2="40" y2="75" stroke="#FCF0F2" stroke-width="1" opacity="0.4"/>
+      <line x1="5" y1="40" x2="18" y2="40" stroke="#FCF0F2" stroke-width="1" opacity="0.4"/>
+      <line x1="62" y1="40" x2="75" y2="40" stroke="#FCF0F2" stroke-width="1" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <h2 class="accommodation-title reveal" data-i18n="accommodation_title">¿Dónde hospedarse?</h2>
+
+  <div class="hotels-grid">
+    <div class="hotel-card">
+      <p class="hotel-name">Casa San Diego</p>
+      <p class="hotel-address">Av. Guadalupe Victoria 232, Centro Histórico, Morelia</p>
+      <a href="https://maps.google.com/?q=Casa+San+Diego+Morelia" target="_blank" class="btn-outline-garnet" data-i18n="accommodation_btn">Cómo llegar</a>
+    </div>
+    <div class="hotel-card">
+      <p class="hotel-name">Hotel de la Soledad</p>
+      <p class="hotel-address">Ignacio Zaragoza 90, Centro Histórico, Morelia</p>
+      <a href="https://maps.google.com/?q=Hotel+de+la+Soledad+Morelia" target="_blank" class="btn-outline-garnet" data-i18n="accommodation_btn">Cómo llegar</a>
+    </div>
+    <div class="hotel-card">
+      <p class="hotel-name">Hotel Misión Catedral Morelia</p>
+      <p class="hotel-address">Guillermo Prieto 15, Centro Histórico, Morelia</p>
+      <a href="https://maps.google.com/?q=Hotel+Misión+Catedral+Morelia" target="_blank" class="btn-outline-garnet" data-i18n="accommodation_btn">Cómo llegar</a>
+    </div>
+    <div class="hotel-card">
+      <p class="hotel-name">Vista Express Morelia</p>
+      <p class="hotel-address">Av. Acueducto 3797, Bosque Cuauhtémoc, Morelia</p>
+      <a href="https://maps.google.com/?q=Vista+Express+Morelia" target="_blank" class="btn-outline-garnet" data-i18n="accommodation_btn">Cómo llegar</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     6. FAQ
+═══════════════════════════════════════ -->
+<section class="faq-section" id="faq">
+  <!-- Talavera tile top-right -->
+  <div class="faq-deco-tr">
+    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="78" height="78" rx="4" fill="var(--cream)" stroke="var(--garnet)" stroke-width="2"/>
+      <rect x="6" y="6" width="68" height="68" rx="2" fill="none" stroke="var(--garnet)" stroke-width="1.5"/>
+      <!-- 4-petal flower center -->
+      <path d="M40 20 Q52 30 40 40 Q28 30 40 20 Z" fill="var(--garnet)" opacity="0.3"/>
+      <path d="M60 40 Q50 52 40 40 Q50 28 60 40 Z" fill="var(--garnet)" opacity="0.3"/>
+      <path d="M40 60 Q28 50 40 40 Q52 50 40 60 Z" fill="var(--garnet)" opacity="0.3"/>
+      <path d="M20 40 Q30 28 40 40 Q30 52 20 40 Z" fill="var(--garnet)" opacity="0.3"/>
+      <circle cx="40" cy="40" r="6" fill="var(--orange-soft)" opacity="0.5"/>
+      <!-- Corner dots -->
+      <circle cx="14" cy="14" r="4" fill="var(--garnet)" opacity="0.4"/>
+      <circle cx="66" cy="14" r="4" fill="var(--garnet)" opacity="0.4"/>
+      <circle cx="14" cy="66" r="4" fill="var(--garnet)" opacity="0.4"/>
+      <circle cx="66" cy="66" r="4" fill="var(--garnet)" opacity="0.4"/>
+      <!-- Diagonal lines corner to center -->
+      <line x1="14" y1="14" x2="34" y2="34" stroke="var(--garnet)" stroke-width="1" opacity="0.2"/>
+      <line x1="66" y1="14" x2="46" y2="34" stroke="var(--garnet)" stroke-width="1" opacity="0.2"/>
+      <line x1="14" y1="66" x2="34" y2="46" stroke="var(--garnet)" stroke-width="1" opacity="0.2"/>
+      <line x1="66" y1="66" x2="46" y2="46" stroke="var(--garnet)" stroke-width="1" opacity="0.2"/>
+    </svg>
+  </div>
+  <!-- Talavera tile bottom-left -->
+  <div class="faq-deco-bl">
+    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="78" height="78" rx="4" fill="var(--cream)" stroke="var(--garnet)" stroke-width="2"/>
+      <rect x="6" y="6" width="68" height="68" rx="2" fill="none" stroke="var(--garnet)" stroke-width="1.5"/>
+      <path d="M40 20 Q52 30 40 40 Q28 30 40 20 Z" fill="var(--orange-soft)" opacity="0.3"/>
+      <path d="M60 40 Q50 52 40 40 Q50 28 60 40 Z" fill="var(--orange-soft)" opacity="0.3"/>
+      <path d="M40 60 Q28 50 40 40 Q52 50 40 60 Z" fill="var(--orange-soft)" opacity="0.3"/>
+      <path d="M20 40 Q30 28 40 40 Q30 52 20 40 Z" fill="var(--orange-soft)" opacity="0.3"/>
+      <circle cx="40" cy="40" r="6" fill="var(--garnet)" opacity="0.35"/>
+      <circle cx="14" cy="14" r="4" fill="var(--orange-soft)" opacity="0.5"/>
+      <circle cx="66" cy="14" r="4" fill="var(--orange-soft)" opacity="0.5"/>
+      <circle cx="14" cy="66" r="4" fill="var(--orange-soft)" opacity="0.5"/>
+      <circle cx="66" cy="66" r="4" fill="var(--orange-soft)" opacity="0.5"/>
+      <line x1="40" y1="6" x2="40" y2="74" stroke="var(--garnet)" stroke-width="1" opacity="0.12"/>
+      <line x1="6" y1="40" x2="74" y2="40" stroke="var(--garnet)" stroke-width="1" opacity="0.12"/>
+    </svg>
+  </div>
+
+  <h2 class="faq-title reveal" data-i18n="faq_title">Antes de que preguntes...</h2>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span data-i18n="faq_q1">¿Cuál es la etiqueta de vestimenta?</span>
+        <span class="faq-indicator">+</span>
+      </div>
+      <div class="faq-answer-wrap">
+        <p class="faq-answer" data-i18n="faq_a1">El blanco está reservado para la novia. ¡Ven tan elegante como quieras!</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span data-i18n="faq_q2">¿Hay estacionamiento en el salón?</span>
+        <span class="faq-indicator">+</span>
+      </div>
+      <div class="faq-answer-wrap">
+        <p class="faq-answer" data-i18n="faq_a2">Sí, Jardín Santa Sofía cuenta con estacionamiento amplio para los invitados.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span data-i18n="faq_q3">¿Habrá transporte de la iglesia al salón?</span>
+        <span class="faq-indicator">+</span>
+      </div>
+      <div class="faq-answer-wrap">
+        <p class="faq-answer" data-i18n="faq_a3">Confirmaremos los detalles próximamente. ¡Estén pendientes!</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span data-i18n="faq_q4">¿Habrá transporte al finalizar la celebración?</span>
+        <span class="faq-indicator">+</span>
+      </div>
+      <div class="faq-answer-wrap">
+        <p class="faq-answer" data-i18n="faq_a4">Confirmaremos los detalles próximamente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     7. PHOTO UPLOAD
+═══════════════════════════════════════ -->
+<section class="photos-section" id="photos">
+  <!-- SVG Camera/Polaroid -->
+  <svg class="photos-illustration reveal" width="140" height="120" viewBox="0 0 140 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Camera body -->
+    <rect x="30" y="32" width="80" height="55" rx="10" fill="#7A2B3A"/>
+    <!-- Lens ring -->
+    <circle cx="70" cy="60" r="18" fill="none" stroke="#D4899A" stroke-width="3"/>
+    <circle cx="70" cy="60" r="11" fill="#FCF0F2" opacity="0.25"/>
+    <circle cx="70" cy="60" r="6" fill="#5C1F2C"/>
+    <!-- Viewfinder -->
+    <rect x="80" y="36" width="20" height="13" rx="3" fill="#D4899A" opacity="0.5"/>
+    <!-- Flash -->
+    <rect x="34" y="36" width="16" height="10" rx="3" fill="#C9A84C" opacity="0.7"/>
+    <!-- Shutter button -->
+    <circle cx="105" cy="38" r="6" fill="#D4899A"/>
+    <!-- Polaroid frame base -->
+    <rect x="12" y="60" width="70" height="58" rx="4" fill="white" style="filter: drop-shadow(0 4px 12px rgba(122,43,58,0.15))"/>
+    <!-- Photo area -->
+    <rect x="17" y="65" width="60" height="40" rx="2" fill="#FCF0F2"/>
+    <!-- Heart inside photo -->
+    <path d="M47 77 C47 74.2, 43 72, 41 75 C39 72, 35 74.2, 35 77 C35 80, 41 86, 41 86 C41 86, 47 80, 47 77 Z" fill="#D4899A"/>
+    <!-- White space bottom of polaroid -->
+    <rect x="12" y="105" width="70" height="13" rx="0" fill="white"/>
+  </svg>
+
+  <h2 class="photos-title" data-i18n="photos_title">¡Queremos ver tus fotos!</h2>
+  <p class="photos-body" data-i18n="photos_body">Aquí podrás subir los vídeos y fotos que captures durante el día</p>
+  <a href="#" class="btn-garnet reveal" data-i18n="photos_btn">Súbelas aquí →</a>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     8. RSVP
+═══════════════════════════════════════ -->
+<section class="rsvp-section" id="rsvp">
+  <!-- Taco + Orange decorations -->
+  <div class="rsvp-deco">
+    <!-- Taco SVG -->
+    <svg width="52" height="44" viewBox="0 0 52 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Shell -->
+      <path d="M4 30 Q26 4 48 30" stroke="#C9854A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M4 30 Q26 10 48 30 L44 38 Q26 28 8 38 Z" fill="#E8B87A" stroke="#C9854A" stroke-width="1.5"/>
+      <!-- Lettuce -->
+      <path d="M12 28 Q16 20 20 26 Q24 18 28 26 Q32 18 36 26 Q40 20 40 27" stroke="#7a8c45" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- Orange filling -->
+      <ellipse cx="26" cy="32" rx="12" ry="5" fill="#E8956D" opacity="0.85"/>
+      <!-- Cream cheese drip -->
+      <path d="M20 34 Q22 40 24 36 Q26 42 28 36 Q30 40 32 34" stroke="#FDF6F0" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
+    <!-- Orange Slice SVG -->
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="22" fill="#E8956D"/>
+      <circle cx="24" cy="24" r="16" fill="#F5B98A" opacity="0.7"/>
+      <!-- Segments -->
+      <line x1="24" y1="8" x2="24" y2="40" stroke="#D4752D" stroke-width="1.2" opacity="0.5"/>
+      <line x1="8" y1="24" x2="40" y2="24" stroke="#D4752D" stroke-width="1.2" opacity="0.5"/>
+      <line x1="11.8" y1="11.8" x2="36.2" y2="36.2" stroke="#D4752D" stroke-width="1.2" opacity="0.5"/>
+      <line x1="36.2" y1="11.8" x2="11.8" y2="36.2" stroke="#D4752D" stroke-width="1.2" opacity="0.5"/>
+      <!-- Pulp dots -->
+      <circle cx="24" cy="18" r="1.5" fill="#FDF6F0" opacity="0.6"/>
+      <circle cx="30" cy="24" r="1.5" fill="#FDF6F0" opacity="0.6"/>
+      <circle cx="18" cy="24" r="1.5" fill="#FDF6F0" opacity="0.6"/>
+      <circle cx="24" cy="30" r="1.5" fill="#FDF6F0" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <h2 class="rsvp-title" data-i18n="rsvp_title">¿Asistirás?</h2>
+
+  <form class="rsvp-form" id="rsvpForm" onsubmit="submitRsvp(event)">
+    <div class="form-field">
+      <label data-i18n="rsvp_nickname">Tu apodo</label>
+      <input type="text" id="rsvp-nickname" placeholder="" />
+    </div>
+    <div class="form-field">
+      <label data-i18n="rsvp_name">Nombre y apellidos</label>
+      <input type="text" id="rsvp-fullname" required placeholder="" />
+    </div>
+    <div class="form-field">
+      <label data-i18n="rsvp_plus_one_q">¿Vienes acompañado/a?</label>
+      <div class="plus-one-toggle">
+        <button type="button" class="toggle-btn" id="plusOneNo" onclick="setPlusOne(false)" data-i18n="rsvp_no">No</button>
+        <button type="button" class="toggle-btn active" id="plusOneYes" onclick="setPlusOne(true)" data-i18n="rsvp_yes">Sí</button>
+      </div>
+    </div>
+    <div class="form-field guest-field visible" id="guestField">
+      <label data-i18n="rsvp_guest">Nombre de tu acompañante</label>
+      <input type="text" id="rsvp-guest" placeholder="" />
+    </div>
+    <div class="form-field">
+      <label data-i18n="rsvp_dietary">Intolerancias o alergias alimenticias</label>
+      <textarea id="rsvp-dietary" rows="3"></textarea>
+    </div>
+    <button type="submit" class="rsvp-submit" data-i18n="rsvp_submit">Confirmar asistencia</button>
+    <p class="rsvp-deadline" data-i18n="rsvp_deadline">Por favor confirma antes del 01/01/2027</p>
+  </form>
+
+  <div class="rsvp-thanks" id="rsvpThanks">
+    <svg class="thanks-heart" width="60" height="56" viewBox="0 0 60 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 52 C30 52 4 34 4 18 C4 10.3 10 4 18 4 C22.5 4 26.5 6.5 30 10 C33.5 6.5 37.5 4 42 4 C50 4 56 10.3 56 18 C56 34 30 52 30 52 Z" fill="#D4899A"/>
+    </svg>
+    <p data-i18n="rsvp_thanks">¡Gracias! Nos vemos el 20 de marzo 🎉</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     9. GIFT REGISTRY
+═══════════════════════════════════════ -->
+<section class="gift-section" id="gift">
+  <h2 class="gift-title reveal" data-i18n="gift_title">Mesa de regalos</h2>
+  <p class="gift-lead reveal" data-i18n="gift_lead">Nos encantaría llevarnos algún detalle de tu parte… pero ya venimos con la maleta llena.</p>
+
+  <div class="gifts-grid">
+    <!-- Card 1 — Lluvia de sobres -->
+    <div class="gift-card">
+      <!-- SVG Envelope with heart -->
+      <svg width="90" height="76" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bills peeking out -->
+        <rect x="38" y="4" width="12" height="18" rx="2" fill="#C9A84C" opacity="0.7"/>
+        <rect x="52" y="6" width="10" height="16" rx="2" fill="#C9A84C" opacity="0.5"/>
+        <!-- Envelope body -->
+        <rect x="8" y="18" width="84" height="58" rx="6" fill="var(--cream)" stroke="var(--garnet)" stroke-width="2.5"/>
+        <!-- Flap -->
+        <path d="M8 18 L50 48 L92 18 Z" fill="var(--garnet)" opacity="0.9"/>
+        <!-- Heart on flap -->
+        <path d="M50 38 C50 35.5, 46.5 33.5, 45 36 C43.5 33.5, 40 35.5, 40 38 C40 41, 45 46, 45 46 C45 46, 50 41, 50 38 Z" fill="#E8956D"/>
+        <!-- Bottom V fold lines -->
+        <line x1="8" y1="76" x2="50" y2="52" stroke="var(--garnet)" stroke-width="1.5" opacity="0.3"/>
+        <line x1="92" y1="76" x2="50" y2="52" stroke="var(--garnet)" stroke-width="1.5" opacity="0.3"/>
+      </svg>
+      <p class="gift-card-title" data-i18n="gift_envelope_title">Lluvia de sobres</p>
+      <p class="gift-card-body" data-i18n="gift_envelope_body">La tradición de regalarles a los novios en efectivo el día del evento.</p>
+    </div>
+
+    <!-- Card 2 — Luna de miel -->
+    <div class="gift-card">
+      <!-- SVG Suitcase -->
+      <svg width="85" height="90" viewBox="0 0 90 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Handle -->
+        <path d="M30 20 Q30 10 45 10 Q60 10 60 20" stroke="var(--garnet)" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- Body -->
+        <rect x="8" y="20" width="74" height="72" rx="10" fill="var(--cream)" stroke="var(--garnet)" stroke-width="2.5"/>
+        <!-- Middle stripe -->
+        <rect x="8" y="50" width="74" height="13" fill="#D4899A" opacity="0.35"/>
+        <!-- Buckle left -->
+        <rect x="14" y="46" width="10" height="20" rx="3" fill="none" stroke="var(--garnet)" stroke-width="2"/>
+        <!-- Buckle right -->
+        <rect x="66" y="46" width="10" height="20" rx="3" fill="none" stroke="var(--garnet)" stroke-width="2"/>
+        <!-- Sticker 1 — orange circle -->
+        <circle cx="38" cy="38" r="10" fill="#E8956D" opacity="0.75"/>
+        <!-- Sticker 2 — rose circle -->
+        <circle cx="58" cy="75" r="8" fill="#D4899A" opacity="0.75"/>
+        <!-- Sticker 3 — cream with lines -->
+        <circle cx="30" cy="72" r="8" fill="#FDF6F0" stroke="var(--garnet)" stroke-width="1.5"/>
+        <line x1="24" y1="72" x2="36" y2="72" stroke="var(--garnet)" stroke-width="1" opacity="0.4"/>
+        <line x1="30" y1="66" x2="30" y2="78" stroke="var(--garnet)" stroke-width="1" opacity="0.4"/>
+      </svg>
+      <p class="gift-card-title" data-i18n="gift_honey_title">Luna de miel</p>
+      <p class="gift-card-body" data-i18n="gift_honey_body">O si quieres puedes contribuir a que nuestra luna de miel esté llena de kilómetros y experiencias inolvidables.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     10. FOOTER
+═══════════════════════════════════════ -->
+<footer class="footer">
+  <p class="footer-names">Katia &amp; Andrés · 20.03.2027</p>
+  <!-- Rose heart -->
+  <svg width="28" height="26" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M14 24 C14 24 2 15.5 2 8 C2 4.7 4.7 2 8 2 C10.2 2 12.1 3.2 14 5 C15.9 3.2 17.8 2 20 2 C23.3 2 26 4.7 26 8 C26 15.5 14 24 14 24 Z" fill="#D4899A" opacity="0.7"/>
+  </svg>
+  <p class="footer-made" data-i18n="footer_made">Hecho con amor · Morelia, México</p>
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+<script>
+  /* ── i18n ── */
+  const i18n = {
+    es: {
+      nav_date: '20.03.2027',
+      hero_announce: '¡Nos casamos!',
+      hero_date: '20 · marzo · 2027',
+      location_label: 'Ubicación',
+      location_venue: 'Jardín Santa Sofía',
+      location_city: 'Morelia, México',
+      location_btn: 'Cómo llegar →',
+      timeline_title: 'timeline',
+      ceremony_label: 'Ceremonia',
+      ceremony_time: '16:00',
+      ceremony_place: 'Santuario Ntra. Sra. de Guadalupe',
+      welcome_label: 'Bienvenida',
+      welcome_time: '16:30',
+      cocktail_label: 'Cocktail',
+      cocktail_time: '18:00',
+      party_label: 'Celebración',
+      party_time: '18:00 – 02:00',
+      accommodation_title: '¿Dónde hospedarse?',
+      accommodation_btn: 'Cómo llegar',
+      faq_title: 'Antes de que preguntes...',
+      faq_q1: '¿Cuál es la etiqueta de vestimenta?',
+      faq_a1: 'El blanco está reservado para la novia. ¡Ven tan elegante como quieras!',
+      faq_q2: '¿Hay estacionamiento en el salón?',
+      faq_a2: 'Sí, Jardín Santa Sofía cuenta con estacionamiento amplio para los invitados.',
+      faq_q3: '¿Habrá transporte de la iglesia al salón?',
+      faq_a3: 'Confirmaremos los detalles próximamente. ¡Estén pendientes!',
+      faq_q4: '¿Habrá transporte al finalizar la celebración?',
+      faq_a4: 'Confirmaremos los detalles próximamente.',
+      photos_title: '¡Queremos ver tus fotos!',
+      photos_body: 'Aquí podrás subir los vídeos y fotos que captures durante el día',
+      photos_btn: 'Súbelas aquí →',
+      rsvp_title: '¿Asistirás?',
+      rsvp_nickname: 'Tu apodo',
+      rsvp_name: 'Nombre y apellidos',
+      rsvp_plus_one_q: '¿Vienes acompañado/a?',
+      rsvp_yes: 'Sí',
+      rsvp_no: 'No',
+      rsvp_guest: 'Nombre de tu acompañante',
+      rsvp_dietary: 'Intolerancias o alergias alimenticias',
+      rsvp_submit: 'Confirmar asistencia',
+      rsvp_deadline: 'Por favor confirma antes del 01/01/2027',
+      rsvp_thanks: '¡Gracias! Nos vemos el 20 de marzo 🎉',
+      gift_title: 'Mesa de regalos',
+      gift_lead: 'Nos encantaría llevarnos algún detalle de tu parte… pero ya venimos con la maleta llena.',
+      gift_envelope_title: 'Lluvia de sobres',
+      gift_envelope_body: 'La tradición de regalarles a los novios en efectivo el día del evento.',
+      gift_honey_title: 'Luna de miel',
+      gift_honey_body: 'O si quieres puedes contribuir a que nuestra luna de miel esté llena de kilómetros y experiencias inolvidables.',
+      footer_made: 'Hecho con amor · Morelia, México',
+    },
+    en: {
+      nav_date: '03.20.2027',
+      hero_announce: "We're getting married!",
+      hero_date: 'March 20th · 2027',
+      location_label: 'Location',
+      location_venue: 'Jardín Santa Sofía',
+      location_city: 'Morelia, México',
+      location_btn: 'Get directions →',
+      timeline_title: 'timeline',
+      ceremony_label: 'Ceremony',
+      ceremony_time: '4:00 pm',
+      ceremony_place: 'Santuario Ntra. Sra. de Guadalupe',
+      welcome_label: 'Welcome',
+      welcome_time: '4:30 pm',
+      cocktail_label: 'Cocktail',
+      cocktail_time: '6:00 pm',
+      party_label: 'Celebration',
+      party_time: '6:00 pm – 2:00 am',
+      accommodation_title: 'Where to stay?',
+      accommodation_btn: 'Get directions',
+      faq_title: 'Before you ask...',
+      faq_q1: 'What is the dress code?',
+      faq_a1: 'White is reserved for the bride. Come as elegant as you like!',
+      faq_q2: 'Is there parking at the venue?',
+      faq_a2: 'Yes, Jardín Santa Sofía has ample parking for guests.',
+      faq_q3: 'Will there be transport from the church to the venue?',
+      faq_a3: "We'll confirm details soon. Stay tuned!",
+      faq_q4: 'Will there be transport at the end of the celebration?',
+      faq_a4: "We'll confirm details soon.",
+      photos_title: 'We want to see your photos!',
+      photos_body: 'Here you can upload the videos and photos you capture during the day',
+      photos_btn: 'Upload here →',
+      rsvp_title: 'Will you attend?',
+      rsvp_nickname: 'Your nickname',
+      rsvp_name: 'Full name',
+      rsvp_plus_one_q: 'Are you bringing a guest?',
+      rsvp_yes: 'Yes',
+      rsvp_no: 'No',
+      rsvp_guest: "Guest's name",
+      rsvp_dietary: 'Dietary restrictions or allergies',
+      rsvp_submit: 'Confirm attendance',
+      rsvp_deadline: 'Please confirm before January 1st, 2027',
+      rsvp_thanks: 'Thank you! See you on March 20th 🎉',
+      gift_title: 'Gift registry',
+      gift_lead: "We'd love a little something from you… but our suitcase is already full.",
+      gift_envelope_title: 'Cash gift',
+      gift_envelope_body: 'The tradition of gifting the newlyweds cash on their wedding day.',
+      gift_honey_title: 'Honeymoon fund',
+      gift_honey_body: 'Or contribute to filling our honeymoon with miles and unforgettable experiences.',
+      footer_made: 'Made with love · Morelia, México',
+    }
+  };
+
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    const data = i18n[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (data[key] !== undefined) el.textContent = data[key];
+    });
+    // Update lang buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+    });
+    document.documentElement.lang = lang;
+    // Update form placeholder-labels (labels are translated via data-i18n already)
+  }
+
+  /* ── Nav solidify ── */
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > window.innerHeight * 0.8) {
+      nav.classList.add('solid');
+    } else {
+      nav.classList.remove('solid');
+    }
+  });
+
+  /* ── FAQ accordion ── */
+  function toggleFaq(questionEl) {
+    const item = questionEl.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    // Open clicked if it was closed
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── RSVP plus-one toggle ── */
+  function setPlusOne(val) {
+    const guestField = document.getElementById('guestField');
+    const yesBtn = document.getElementById('plusOneYes');
+    const noBtn = document.getElementById('plusOneNo');
+    if (val) {
+      guestField.classList.add('visible');
+      yesBtn.classList.add('active');
+      noBtn.classList.remove('active');
+    } else {
+      guestField.classList.remove('visible');
+      noBtn.classList.add('active');
+      yesBtn.classList.remove('active');
+    }
+  }
+  // Default: yes
+  setPlusOne(true);
+
+  /* ── RSVP submit ── */
+  function submitRsvp(e) {
+    e.preventDefault();
+    const nickname = document.getElementById('rsvp-nickname').value.trim();
+    const fullname = document.getElementById('rsvp-fullname').value.trim();
+    const plusOne = document.getElementById('plusOneYes').classList.contains('active');
+    const guest = document.getElementById('rsvp-guest').value.trim();
+    const dietary = document.getElementById('rsvp-dietary').value.trim();
+
+    let msg = `🎊 Confirmación de asistencia — Katia y Andrés\n`;
+    if (nickname) msg += `Apodo: ${nickname}\n`;
+    msg += `Nombre: ${fullname}\n`;
+    if (plusOne && guest) msg += `Acompañante: ${guest}\n`;
+    else if (plusOne) msg += `Acompañante: Sí\n`;
+    else msg += `Acompañante: No\n`;
+    if (dietary) msg += `Alergias: ${dietary}`;
+
+    window.open(`https://wa.me/353830724617?text=${encodeURIComponent(msg)}`, '_blank');
+
+    document.getElementById('rsvpForm').style.display = 'none';
+    const thanks = document.getElementById('rsvpThanks');
+    thanks.classList.add('visible');
+  }
+
+  /* ── GSAP Animations ── */
+  window.addEventListener('load', () => {
+    if (typeof gsap === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance — set initial states first, then animate to final
+    gsap.set('.hero-announce', { opacity: 0, y: 30 });
+    gsap.set('.hero-names',    { opacity: 0, y: 50 });
+    gsap.set('.hero-date',     { opacity: 0, y: 20 });
+
+    gsap.to('.hero-announce', { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: 'power2.out' });
+    gsap.to('.hero-names',    { opacity: 1, y: 0, duration: 1.2, delay: 0.6, ease: 'power2.out' });
+    gsap.to('.hero-date',     { opacity: 1, y: 0, duration: 1, delay: 1, ease: 'power2.out' });
+
+    // Location parallax
+    gsap.to('.location-img', {
+      yPercent: 25,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.location',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    // Timeline path draw
+    gsap.to('.timeline-path', {
+      strokeDashoffset: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.timeline-section',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        scrub: 1
+      }
+    });
+
+    // Timeline events stagger from sides
+    ['#te1', '#te3'].forEach(sel => {
+      gsap.from(sel, {
+        opacity: 0, x: -60, duration: 0.8, ease: 'power2.out',
+        scrollTrigger: { trigger: sel, start: 'top 85%' }
+      });
+    });
+    ['#te2', '#te4'].forEach(sel => {
+      gsap.from(sel, {
+        opacity: 0, x: 60, duration: 0.8, ease: 'power2.out',
+        scrollTrigger: { trigger: sel, start: 'top 85%' }
+      });
+    });
+
+    // Section reveals (generic)
+    document.querySelectorAll('.reveal').forEach(el => {
+      gsap.from(el, {
+        opacity: 0, y: 40, duration: 0.8, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      });
+    });
+
+    // Accommodation cards stagger
+    gsap.from('.hotel-card', {
+      opacity: 0, y: 50, stagger: 0.15, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: '.accommodation', start: 'top 70%' }
+    });
+
+    // Gift cards scale
+    gsap.from('.gift-card', {
+      opacity: 0, scale: 0.85, stagger: 0.2, duration: 0.8, ease: 'back.out(1.5)',
+      scrollTrigger: { trigger: '.gift-section', start: 'top 75%' }
+    });
+
+    // Photo illustration bounce
+    gsap.from('.photos-illustration', {
+      opacity: 0, scale: 0.5, duration: 0.9, ease: 'back.out(2)',
+      scrollTrigger: { trigger: '.photos-section', start: 'top 80%' }
+    });
+
+  }); // end load
+</script>
+
+</body>
+</html>
